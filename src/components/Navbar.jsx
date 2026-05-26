@@ -24,18 +24,13 @@ export default function Navbar() {
       }`}
     >
       <nav className="section-shell flex h-20 items-center justify-between" aria-label="Main navigation">
-        <a href="#hero" className="focus-ring rounded-lg font-mono text-sm font-bold tracking-wide text-white">
-          <span className="text-accent">{`{ `}</span>
-          {portfolio.name}
-          <span className="text-accent">{` }`}</span>
-        </a>
 
         <div className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
             <a
               key={link}
               href={`#${link.toLowerCase()}`}
-              className="focus-ring rounded-md font-mono text-xs uppercase tracking-[0.22em] text-muted transition hover:text-accent"
+              className="focus-ring rounded-md font-mono text-md uppercase tracking-[0.22em] text-muted transition hover:text-accent"
             >
               {link}
             </a>

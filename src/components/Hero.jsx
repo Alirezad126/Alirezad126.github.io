@@ -12,10 +12,10 @@ const lastName = restName.join(' ')
 
 export default function Hero() {
   return (
-    <section
-      id="about"
-      className="relative flex min-h-screen items-center overflow-hidden px-4 pt-24 sm:px-6 lg:px-8"
-    >
+  <section
+    id="about"
+    className="relative overflow-hidden px-4 pt-24 pb-4 sm:px-6 sm:pb-24 lg:px-8 lg:pt-28 lg:pb-28"
+  >
       <div className="pointer-events-none absolute left-[-30%] top-[8%] h-64 w-64 rounded-full bg-accent/10 blur-3xl sm:left-[5%] sm:h-80 sm:w-80 animate-meshMove" />
       <div className="pointer-events-none absolute bottom-[5%] right-[-30%] h-72 w-72 rounded-full bg-teal-400/10 blur-3xl sm:right-[0%] sm:h-96 sm:w-96 animate-meshMove" />
 
@@ -33,15 +33,13 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20 lg:py-20">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         {/* Text content */}
         <div className="order-1 mx-auto w-full max-w-2xl animate-fadeInUp text-center lg:mx-0 lg:text-left">
           {/* Tagline */}
           <div className="mb-8 flex justify-center lg:mb-5 lg:justify-start">
             <div className="inline-flex max-w-[92vw] rounded-2xl border border-accent/40 bg-accent/10 px-4 py-2.5 font-mono text-[10px] font-bold leading-5 tracking-wide text-accent shadow-glow sm:rounded-full sm:text-xs">
               <span className="block text-center sm:whitespace-nowrap">
-                Quantitative Analyst
-                <span className="mx-2 text-accent/60">|</span>
                 AI/ML Engineer
                 <span className="mx-2 text-accent/60">|</span>
                 Data Scientist
@@ -49,10 +47,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Mobile avatar */}
-          <div className="mb-10 flex justify-center lg:hidden">
-            <AvatarBlock />
-          </div>
 
           <h1 className="font-display text-[clamp(2.75rem,12vw,5.4rem)] font-bold leading-[0.98] tracking-[-0.055em] text-white sm:text-[clamp(3.5rem,7vw,5.4rem)]">
             <span className="block">Hi, I'm</span>
@@ -65,6 +59,11 @@ export default function Hero() {
               {lastName}
             </span>
           </h1>
+
+           {/* Mobile avatar */}
+          <div className="mt-10 mb-10 flex justify-center lg:hidden">
+            <AvatarBlock />
+          </div>
 
           <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-muted sm:text-lg lg:mx-0">
             {portfolio.bio}

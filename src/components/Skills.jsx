@@ -5,7 +5,7 @@ export default function Skills() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section id="skills" ref={ref} className={`section-shell reveal py-24 ${isVisible ? 'is-visible' : ''}`}>
+    <section id="skills" ref={ref} className={`section-shell reveal px-4 py-20 sm:px-6 lg:px-8 ${isVisible ? 'is-visible' : ''}`}>
       <p className="section-label">Skills</p>
       <h2 className="section-title">A stack built for applied research and production ML.</h2>
 
