@@ -1,26 +1,33 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 export default function useInView(options = {}) {
-  const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  const observerOptions = useMemo(
+    () => ({
+      threshold: 0,
+      rootMargin: '0px 0px -25% 0px',
+      ...options
+    }),
+    [options]
+  )
 
   useEffect(() => {
-    const node = ref.current;
-    if (!node) return undefined;
+    const element = ref.current
+    if (!element) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.16, rootMargin: '0px 0px -80px 0px', ...options }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true)
+        observer.unobserve(element)
+      }
+    }, observerOptions)
 
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [options]);
+    observer.observe(element)
 
-  return { ref, isVisible };
+    return () => observer.disconnect()
+  }, [observerOptions])
+
+  return { ref, isVisible }
 }

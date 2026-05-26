@@ -1,71 +1,95 @@
-import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import portfolio from '../data/portfolio';
+import { Menu, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import portfolio from '../data/portfolio'
+import ThemeToggle from './ThemeToggle'
 
-const links = ['About', 'Projects', 'Skills', 'Experience', 'Contact'];
+const links = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Contact', href: '#contact' }
+]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 18);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
 
-  const closeMenu = () => setOpen(false);
+    handleScroll()
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleClick = () => {
+    setIsOpen(false)
+  }
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'border-b border-line bg-ink/75 shadow-card backdrop-blur-xl' : 'bg-transparent'
+      className={`fixed left-0 top-0 z-50 w-full border-b transition ${
+        isScrolled
+          ? 'border-white/10 bg-slate-950/95 shadow-card backdrop-blur-xl dark:bg-ink/90'
+          : 'border-white/10 bg-slate-950/90 backdrop-blur-xl dark:bg-ink/70'
       }`}
     >
-      <nav className="section-shell flex h-20 items-center justify-between" aria-label="Main navigation">
+      <nav className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a
+          href="#about"
+          onClick={handleClick}
+          className="font-mono text-sm font-bold tracking-wide text-white transition hover:text-accent"
+        >
+        </a>
 
         <div className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
             <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="focus-ring rounded-md font-mono text-md uppercase tracking-[0.22em] text-muted transition hover:text-accent"
+              key={link.href}
+              href={link.href}
+              className="font-mono text-xs font-bold uppercase tracking-[0.28em] text-slate-300 transition hover:text-accent"
             >
-              {link}
+              {link.label}
             </a>
           ))}
         </div>
 
-        <button
-          type="button"
-          className="focus-ring inline-flex rounded-xl border border-line bg-white/5 p-2 text-white md:hidden"
-          aria-label="Toggle navigation menu"
-          aria-expanded={open}
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+
+          <button
+            type="button"
+            onClick={() => setIsOpen((value) => !value)}
+            className="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-white shadow-card backdrop-blur-md transition hover:border-accent hover:text-accent md:hidden"
+            aria-label="Toggle navigation menu"
+          >
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
 
-      <div
-        className={`overflow-hidden border-line bg-ink/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
-          open ? 'max-h-96 border-y' : 'max-h-0 border-y-0'
-        }`}
-      >
-        <div className="section-shell flex flex-col py-4">
-          {links.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              onClick={closeMenu}
-              className="focus-ring rounded-lg px-2 py-4 font-mono text-sm uppercase tracking-[0.22em] text-muted hover:bg-white/5 hover:text-accent"
-            >
-              {link}
-            </a>
-          ))}
+      {isOpen && (
+        <div className="mx-auto w-full max-w-7xl px-4 pb-4 sm:px-6 md:hidden">
+          <div className="rounded-2xl border border-white/10 bg-slate-950/95 p-4 shadow-card backdrop-blur-xl">
+            <div className="flex flex-col gap-2">
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleClick}
+                  className="rounded-xl px-4 py-3 font-mono text-xs font-bold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-accent/10 hover:text-accent"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </header>
-  );
+  )
 }
