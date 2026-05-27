@@ -51,10 +51,6 @@ export default function Hero() {
             <span className="mt-2 block bg-gradient-to-r from-accent via-emerald-700 to-slate-950 bg-clip-text text-transparent sm:inline dark:via-emerald-300 dark:to-white">
               {firstName}
             </span>
-
-            <span className="block bg-gradient-to-r from-accent via-emerald-700 to-slate-950 bg-clip-text text-transparent sm:ml-4 sm:inline dark:via-emerald-300 dark:to-white">
-              {lastName}
-            </span>
           </h1>
 
           <div className="mt-7 mb-7 flex justify-center lg:hidden">
