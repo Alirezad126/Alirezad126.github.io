@@ -14,20 +14,36 @@ const icons = Object.values(require('simple-icons')).filter((i) => i && i.title)
 // back to a monogram in the UI.
 const map = {
   Python: 'Python',
+  'C++': 'C++',
+  Bash: 'GNU Bash',
+  JavaScript: 'JavaScript',
+
+  Gurobi: 'Gurobi',
+
+  PyTorch: 'PyTorch',
+  TensorFlow: 'TensorFlow',
+  'scikit-learn': 'scikit-learn',
+  'Hugging Face': 'Hugging Face',
+  OpenCV: 'OpenCV',
+  'OpenAI Gym': 'OpenAI Gym',
+
   pandas: 'pandas',
   NumPy: 'NumPy',
   PySpark: 'Apache Spark',
-  Gurobi: 'Gurobi',
-  PyTorch: 'PyTorch',
-  'scikit-learn': 'scikit-learn',
-  'OpenAI Gym': 'OpenAI Gym',
-  'Git & CI/CD': 'Git',
-  Docker: 'Docker',
-  MLflow: 'MLflow',
-  'Azure Databricks': 'Databricks',
-  FastAPI: 'FastAPI',
   PostgreSQL: 'PostgreSQL',
-  Snowflake: 'Snowflake'
+  Snowflake: 'Snowflake',
+  Databricks: 'Databricks',
+
+  Docker: 'Docker',
+  FastAPI: 'FastAPI',
+  Flask: 'Flask',
+  MLflow: 'MLflow',
+  Git: 'Git',
+  'GitHub Actions': 'GitHub Actions',
+
+  React: 'React',
+  HTML5: 'HTML5',
+  'Tailwind CSS': 'Tailwind CSS'
 }
 
 const out = {}

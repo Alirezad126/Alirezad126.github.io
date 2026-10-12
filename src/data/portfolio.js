@@ -62,8 +62,8 @@ const portfolio = {
 
   skills: [
     {
-      category: 'Languages & Data',
-      items: ['Python', 'pandas', 'NumPy', 'SQL', 'PySpark']
+      category: 'Programming',
+      items: ['Python', 'C++', 'Bash', 'SQL', 'JavaScript']
     },
     {
       category: 'Optimization & Control',
@@ -71,20 +71,26 @@ const portfolio = {
     },
     {
       category: 'Machine Learning',
-      items: ['PyTorch', 'scikit-learn', 'OpenAI Gym', 'PySINDy', 'EnergyPlus']
+      items: [
+        'PyTorch',
+        'TensorFlow',
+        'scikit-learn',
+        'Hugging Face',
+        'OpenCV',
+        'OpenAI Gym'
+      ]
     },
     {
-      category: 'Platforms & MLOps',
-      items: [
-        'Git & CI/CD',
-        'Docker',
-        'MLflow',
-        'Azure Databricks',
-        'FastAPI',
-        'PostgreSQL',
-        'Snowflake',
-        'AWS'
-      ]
+      category: 'Data Engineering',
+      items: ['pandas', 'NumPy', 'PySpark', 'PostgreSQL', 'Snowflake', 'Databricks']
+    },
+    {
+      category: 'MLOps & Deployment',
+      items: ['Docker', 'FastAPI', 'Flask', 'MLflow', 'Git', 'GitHub Actions', 'AWS']
+    },
+    {
+      category: 'Web',
+      items: ['React', 'HTML5', 'Tailwind CSS']
     }
   ],
 
