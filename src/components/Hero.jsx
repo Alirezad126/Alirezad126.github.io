@@ -23,11 +23,17 @@ export default function Hero() {
         />
 
         <div className="min-w-0">
-          <p className="eyebrow">{portfolio.role}</p>
+          <h1>
+            <span className="block text-lg font-medium text-muted sm:text-xl">
+              Hi, I&apos;m
+            </span>
 
-          <h1 className="mt-3 text-4xl font-bold tracking-tight text-heading sm:text-5xl">
-            {portfolio.name}
+            <span className="mt-1 block font-display text-5xl leading-[1.05] tracking-tight text-accent sm:text-6xl">
+              {portfolio.name}
+            </span>
           </h1>
+
+          <p className="eyebrow mt-4">{portfolio.role}</p>
 
           <p className="mt-5 max-w-2xl leading-7 sm:text-lg sm:leading-8">{portfolio.bio}</p>
 
