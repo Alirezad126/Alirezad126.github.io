@@ -1,4 +1,12 @@
-import { ArrowRight, Download, Github, Linkedin, Mail, MapPin } from 'lucide-react'
+import {
+  ArrowRight,
+  Briefcase,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 import portfolio from '../data/portfolio'
 
@@ -53,6 +61,11 @@ export default function Hero() {
             <Link to="/projects" className="btn-primary focus-ring">
               View Projects
               <ArrowRight size={18} />
+            </Link>
+
+            <Link to="/experience" className="btn-ghost focus-ring">
+              <Briefcase size={18} />
+              Experience
             </Link>
 
             <a href={portfolio.cvUrl} className="btn-ghost focus-ring">

@@ -1,10 +1,10 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import portfolio from '../data/portfolio'
+import { NavLink, useLocation } from 'react-router-dom'
 import ThemeToggle from './ThemeToggle'
 
 const links = [
+  { label: 'Home', to: '/' },
   { label: 'News', to: '/news' },
   { label: 'Experience', to: '/experience' },
   { label: 'Projects', to: '/projects' },
@@ -29,22 +29,20 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/90 backdrop-blur">
       <nav className="shell flex h-20 items-center justify-between gap-6">
-        <Link
-          to="/"
-          className="focus-ring rounded text-base font-semibold tracking-tight text-heading transition-colors hover:text-accent"
-        >
-          {portfolio.name}
-        </Link>
-
         <div className="hidden items-center gap-5 md:flex lg:gap-8">
           {links.map((link) => (
-            <NavLink key={link.to} to={link.to} className={linkClass}>
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.to === '/'}
+              className={linkClass}
+            >
               {link.label}
             </NavLink>
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
 
           <button
@@ -65,6 +63,7 @@ export default function Navbar() {
             <NavLink
               key={link.to}
               to={link.to}
+              end={link.to === '/'}
               className={({ isActive }) =>
                 `rounded-lg px-2 py-3 text-base font-medium ${
                   isActive ? 'text-accent' : 'text-muted hover:text-accent'
