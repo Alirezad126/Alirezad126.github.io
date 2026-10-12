@@ -7,14 +7,12 @@ const tags = ['Python', 'Safe RL', 'PD-DDPG', 'OpenAI Gym', 'NeuroMANCER', 'DPC'
 
 export default function BuildingSafeRlProject() {
   return (
-    <main className="relative overflow-hidden px-4 pt-28 pb-24 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute left-[-20%] top-[10%] h-96 w-96 rounded-full bg-accent/15 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-20%] bottom-[10%] h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+    <main className="shell py-12 sm:py-16">
 
-      <section className="relative mx-auto max-w-6xl">
+      <section className="relative">
         <Link
-          to="/#projects"
-          className="focus-ring inline-flex items-center gap-2 rounded-full border border-slate-400 bg-white/80 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wide text-slate-800 shadow-card transition hover:border-accent hover:text-accent dark:border-line dark:bg-white/5 dark:text-muted"
+          to="/projects"
+          className="focus-ring inline-flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-accent"
         >
           <ArrowLeft size={16} />
           Back to Projects
@@ -22,13 +20,13 @@ export default function BuildingSafeRlProject() {
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <p className="section-label">Safe Building Control</p>
+            <p className="eyebrow">Safe Building Control</p>
 
-            <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-[-0.04em] text-slate-950 sm:text-6xl dark:text-white">
+            <h1 className="mt-4 text-3xl font-bold tracking-tight text-heading sm:text-4xl">
               Learning to Control Indoor Air Temperature with Safe RL and DPC
             </h1>
 
-            <p className="mt-6 text-lg font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-6 leading-7 text-muted">
               This project investigates learning-based control for indoor air
               temperature regulation in a single-zone building. The main goal is
               to keep the room temperature within a prescribed thermal comfort
@@ -43,7 +41,7 @@ export default function BuildingSafeRlProject() {
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-wide text-emerald-800 dark:text-accent"
+                  className="chip"
                 >
                   {tag}
                 </span>
@@ -54,31 +52,31 @@ export default function BuildingSafeRlProject() {
               href="https://github.com/pnnl/neuromancer/blob/master/examples/domain_examples/RL_DPC_building_control.ipynb"
               target="_blank"
               rel="noreferrer"
-              className="focus-ring mt-8 inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 font-bold text-slate-950 shadow-glow transition hover:-translate-y-1"
+              className="focus-ring mt-8 inline-flex items-center gap-2 btn-primary"
             >
               <Github size={18} />
               View GitHub
             </a>
           </div>
 
-          <div className="overflow-hidden rounded-3xl border border-slate-400 bg-white/90 shadow-card backdrop-blur-md dark:border-line dark:bg-white/[0.04]">
+          <div className="overflow-hidden rounded-xl border border-line bg-card">
             <img
-              src="/projects/building-safe-rl.png"
+              src="/projects/building-safe-rl.jpg"
               alt="Safe reinforcement learning building control project"
               className="h-full max-h-[460px] w-full object-cover"
             />
           </div>
         </div>
 
-        <article className="mt-16 rounded-3xl border border-slate-400 bg-white/90 p-6 shadow-card backdrop-blur-md sm:p-8 lg:p-10 dark:border-line dark:bg-white/[0.04]">
+        <article className="mt-16 rounded-xl border border-line bg-card p-6 sm:p-8 lg:p-10">
           <section>
-            <p className="section-label">Objective</p>
+            <p className="eyebrow">Objective</p>
 
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-950 dark:text-white">
+            <h2 className="mt-3 text-xl font-semibold text-heading">
               Constrained temperature regulation
             </h2>
 
-            <p className="mt-5 font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-5 font-medium leading-8 text-muted">
               The control objective is to determine heating actions that regulate
               the indoor air temperature while satisfying comfort constraints.
               In practice, this means the controller should avoid overheating or
@@ -90,13 +88,13 @@ export default function BuildingSafeRlProject() {
           </section>
 
           <section className="mt-12">
-            <p className="section-label">System Model</p>
+            <p className="eyebrow">System Model</p>
 
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-950 dark:text-white">
+            <h2 className="mt-3 text-xl font-semibold text-heading">
               Single-zone building dynamics
             </h2>
 
-            <p className="mt-5 font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-5 font-medium leading-8 text-muted">
               The building was represented using a discrete-time linear
               state-space model. The state vector <InlineMath math="x_t" />{' '}
               describes the thermal condition of the building, the input{' '}
@@ -108,7 +106,7 @@ export default function BuildingSafeRlProject() {
 
             <Equation math={String.raw`x_{t+1}=Ax_t+Bu_t+Ed_t,\qquad y_t=Cx_t`} />
 
-            <p className="font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="font-medium leading-8 text-muted">
               This formulation provides a compact environment for evaluating
               learning-based controllers. In the implementation, the model and
               data generation were built using NeuroMANCER, while the
@@ -118,13 +116,13 @@ export default function BuildingSafeRlProject() {
           </section>
 
           <section className="mt-12">
-            <p className="section-label">Method 01</p>
+            <p className="eyebrow">Method 01</p>
 
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-950 dark:text-white">
+            <h2 className="mt-3 text-xl font-semibold text-heading">
               Differentiable Predictive Control
             </h2>
 
-            <p className="mt-5 font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-5 font-medium leading-8 text-muted">
               In the Differentiable Predictive Control formulation, the
               controller is expressed as a neural policy. The policy receives
               the current state, the reference temperature bounds, and the
@@ -133,7 +131,7 @@ export default function BuildingSafeRlProject() {
 
             <Equation math={String.raw`u_k=\pi_{\theta}(x_k,R,d_k)`} />
 
-            <p className="font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="font-medium leading-8 text-muted">
               Because the system model is differentiable, the policy parameters
               can be optimized directly through the predicted system trajectory.
               The objective penalizes deviation from the desired temperature
@@ -148,7 +146,7 @@ export default function BuildingSafeRlProject() {
               \right)`}
             />
 
-            <p className="font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="font-medium leading-8 text-muted">
               This method is model-based because the policy is trained by using
               the differentiable dynamics of the building. It is useful when a
               reliable model is available and when the controller can be trained
@@ -157,13 +155,13 @@ export default function BuildingSafeRlProject() {
           </section>
 
           <section className="mt-12">
-            <p className="section-label">Method 02</p>
+            <p className="eyebrow">Method 02</p>
 
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-950 dark:text-white">
+            <h2 className="mt-3 text-xl font-semibold text-heading">
               Safe reinforcement learning with PD-DDPG
             </h2>
 
-            <p className="mt-5 font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-5 font-medium leading-8 text-muted">
               The second method formulates the task as a constrained
               reinforcement learning problem. A primal-dual version of DDPG was
               used because the heating action is continuous and the controller
@@ -179,7 +177,7 @@ export default function BuildingSafeRlProject() {
               \right]`}
             />
 
-            <p className="font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="font-medium leading-8 text-muted">
               The dual variable <InlineMath math="\lambda" /> controls the
               importance of the safety cost. When the policy violates comfort
               constraints, <InlineMath math="\lambda" /> increases, forcing the
@@ -192,7 +190,7 @@ export default function BuildingSafeRlProject() {
               \max\left(0,\lambda+\alpha(C(s_t,a_t)-d)\right)`}
             />
 
-            <p className="font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="font-medium leading-8 text-muted">
               In this setup, the actor network learns the control policy, the
               critic network estimates the expected return, and a separate cost
               network estimates the constraint violation. A replay buffer and
@@ -202,13 +200,13 @@ export default function BuildingSafeRlProject() {
           </section>
 
           <section className="mt-12">
-            <p className="section-label">Constraint Definition</p>
+            <p className="eyebrow">Constraint Definition</p>
 
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-950 dark:text-white">
+            <h2 className="mt-3 text-xl font-semibold text-heading">
               Thermal comfort violation
             </h2>
 
-            <p className="mt-5 font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-5 font-medium leading-8 text-muted">
               The safety cost was defined based on the distance between the
               indoor temperature and the acceptable comfort interval. If the
               temperature remains between the lower bound{' '}
@@ -225,7 +223,7 @@ export default function BuildingSafeRlProject() {
               \right]`}
             />
 
-            <p className="font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="font-medium leading-8 text-muted">
               This definition makes the constraint interpretable. The controller
               is not only rewarded for saving energy, but also penalized when it
               produces actions that lead to uncomfortable indoor temperatures.
@@ -233,13 +231,13 @@ export default function BuildingSafeRlProject() {
           </section>
 
           <section className="mt-12">
-            <p className="section-label">Outcome</p>
+            <p className="eyebrow">Outcome</p>
 
-            <h2 className="mt-3 font-display text-3xl font-bold text-slate-950 dark:text-white">
+            <h2 className="mt-3 text-xl font-semibold text-heading">
               Comparison of learning-based controllers
             </h2>
 
-            <p className="mt-5 font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-5 font-medium leading-8 text-muted">
               The final implementation provides a direct comparison between a
               model-based learning controller and a safe reinforcement learning
               controller for the same building-control task. DPC uses the
@@ -259,7 +257,7 @@ export default function BuildingSafeRlProject() {
 
 function Equation({ math }) {
   return (
-    <div className="my-8 overflow-x-auto text-slate-950 dark:text-white">
+    <div className="my-8 overflow-x-auto text-heading">
       <BlockMath math={math} />
     </div>
   )

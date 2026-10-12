@@ -5,14 +5,12 @@ const tags = ['DQN', 'Q-Learning', 'Experience Replay', 'Exploration', 'PyTorch'
 
 export default function SnakeProject() {
   return (
-    <main className="relative overflow-hidden px-4 pt-28 pb-24 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute left-[-20%] top-[10%] h-96 w-96 rounded-full bg-accent/15 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-20%] bottom-[10%] h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+    <main className="shell py-12 sm:py-16">
 
-      <section className="relative mx-auto max-w-6xl">
+      <section className="relative">
         <Link
-          to="/#projects"
-          className="focus-ring inline-flex items-center gap-2 rounded-full border border-slate-400 bg-white/80 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wide text-slate-800 shadow-card transition hover:border-accent hover:text-accent dark:border-line dark:bg-white/5 dark:text-muted"
+          to="/projects"
+          className="focus-ring inline-flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-accent"
         >
           <ArrowLeft size={16} />
           Back to Projects
@@ -20,13 +18,13 @@ export default function SnakeProject() {
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <p className="section-label">Reinforcement Learning</p>
+            <p className="eyebrow">Reinforcement Learning</p>
 
-            <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-[-0.04em] text-slate-950 sm:text-6xl dark:text-white">
+            <h1 className="mt-4 text-3xl font-bold tracking-tight text-heading sm:text-4xl">
               DQN Agent Playing a Snake Game
             </h1>
 
-            <p className="mt-6 text-lg font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-6 leading-7 text-muted">
               This project integrates a Pygame-based interface with a reinforcement
               learning environment. It demonstrates how a Deep Q-Network agent can
               learn to play the Snake game by interacting with the environment and
@@ -37,7 +35,7 @@ export default function SnakeProject() {
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-wide text-emerald-800 dark:text-accent"
+                  className="chip"
                 >
                   {tag}
                 </span>
@@ -45,7 +43,7 @@ export default function SnakeProject() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-3xl border border-slate-400 bg-white/90 shadow-card backdrop-blur-md dark:border-line dark:bg-white/[0.04]">
+          <div className="overflow-hidden rounded-xl border border-line bg-card">
             <img
               src="https://www.coolmathgames.com/sites/default/files/Snake_OG-logo.jpg"
               alt="Snake reinforcement learning project"
@@ -54,13 +52,13 @@ export default function SnakeProject() {
           </div>
         </div>
 
-        <article className="mt-14 rounded-3xl border border-slate-400 bg-white/90 p-6 shadow-card backdrop-blur-md sm:p-8 lg:p-10 dark:border-line dark:bg-white/[0.04]">
+        <article className="mt-14 rounded-xl border border-line bg-card p-6 sm:p-8 lg:p-10">
           <section>
-            <h2 className="font-display text-2xl font-bold text-slate-950 dark:text-white">
+            <h2 className="text-xl font-semibold text-heading">
               1. Description
             </h2>
 
-            <p className="mt-4 font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-4 font-medium leading-8 text-muted">
               This project integrates a Pygame-based interface with a reinforcement
               learning environment. It allows both machine learning agents and human
               players to interact with the PySnake game. The project demonstrates
@@ -73,15 +71,15 @@ export default function SnakeProject() {
           </section>
 
           <section className="mt-10">
-            <h2 className="font-display text-2xl font-bold text-slate-950 dark:text-white">
+            <h2 className="text-xl font-semibold text-heading">
               2. Game Mechanics
             </h2>
 
-            <div className="mt-5 space-y-4 font-medium leading-8 text-slate-700 dark:text-muted">
+            <div className="mt-5 space-y-4 font-medium leading-8 text-muted">
               <p className="flex gap-3">
                 <span className="mt-3 h-2 w-2 shrink-0 rotate-45 bg-accent" />
                 <span>
-                  <strong className="text-slate-950 dark:text-white">
+                  <strong className="text-heading">
                     Game Environment:
                   </strong>{' '}
                   The environment consists of a fixed-size grid with defined
@@ -93,7 +91,7 @@ export default function SnakeProject() {
               <p className="flex gap-3">
                 <span className="mt-3 h-2 w-2 shrink-0 rotate-45 bg-accent" />
                 <span>
-                  <strong className="text-slate-950 dark:text-white">
+                  <strong className="text-heading">
                     Action Space:
                   </strong>{' '}
                   The agent can choose from four discrete actions corresponding
@@ -105,7 +103,7 @@ export default function SnakeProject() {
               <p className="flex gap-3">
                 <span className="mt-3 h-2 w-2 shrink-0 rotate-45 bg-accent" />
                 <span>
-                  <strong className="text-slate-950 dark:text-white">
+                  <strong className="text-heading">
                     State Representation:
                   </strong>{' '}
                   The game&apos;s state includes the position of the snake&apos;s
@@ -119,15 +117,15 @@ export default function SnakeProject() {
           </section>
 
           <section className="mt-10">
-            <h2 className="font-display text-2xl font-bold text-slate-950 dark:text-white">
+            <h2 className="text-xl font-semibold text-heading">
               3. Objectives and Rewards
             </h2>
 
-            <div className="mt-5 space-y-4 font-medium leading-8 text-slate-700 dark:text-muted">
+            <div className="mt-5 space-y-4 font-medium leading-8 text-muted">
               <p className="flex gap-3">
                 <span className="mt-3 h-2 w-2 shrink-0 rotate-45 bg-accent" />
                 <span>
-                  <strong className="text-slate-950 dark:text-white">
+                  <strong className="text-heading">
                     Objective:
                   </strong>{' '}
                   The primary goal for the agent is to increase its score, which
@@ -140,7 +138,7 @@ export default function SnakeProject() {
               <p className="flex gap-3">
                 <span className="mt-3 h-2 w-2 shrink-0 rotate-45 bg-accent" />
                 <span>
-                  <strong className="text-slate-950 dark:text-white">
+                  <strong className="text-heading">
                     Reward:
                   </strong>{' '}
                   The training process involves a reward system where positive

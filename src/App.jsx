@@ -1,32 +1,31 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Experience from './components/Experience'
-import Publications from './components/Publications'
-import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Navbar from './components/Navbar'
 import ScrollToTop from './components/ScrollToTop'
 
-import EnergyHubProject from './pages/projects/EnergyHubProject'
-import BuildingSafeRlProject from './pages/projects/BuildingSafeRlProject'
-import RagGptProject from './pages/projects/RagGptProject'
-import SnakeProject from './pages/projects/SnakeProject'
-import PersonalAiChatbotProject from './pages/projects/PersonalAiChatbotProject'
+import Home from './pages/Home'
+import ContactPage from './pages/ContactPage'
+import ExperiencePage from './pages/ExperiencePage'
+import NewsPage from './pages/NewsPage'
+import NotFound from './pages/NotFound'
+import ProjectsPage from './pages/ProjectsPage'
+import PublicationsPage from './pages/PublicationsPage'
 
-function HomePage() {
-  return (
-    <main>
-      <Hero />
-      <Experience />
-      <Skills />
-      <Projects />
-      <Publications />
-      <Contact />
-    </main>
-  )
+// Project write-ups are code-split: they pull in KaTeX and long-form content
+// that the rest of the site never needs.
+const SdDpcProject = lazy(() => import('./pages/projects/SdDpcProject'))
+const DomparkProject = lazy(() => import('./pages/projects/DomparkProject'))
+const AhuFaultDetectionProject = lazy(() => import('./pages/projects/AhuFaultDetectionProject'))
+const EnergyHubProject = lazy(() => import('./pages/projects/EnergyHubProject'))
+const BuildingSafeRlProject = lazy(() => import('./pages/projects/BuildingSafeRlProject'))
+const RagGptProject = lazy(() => import('./pages/projects/RagGptProject'))
+const SnakeProject = lazy(() => import('./pages/projects/SnakeProject'))
+const PersonalAiChatbotProject = lazy(() => import('./pages/projects/PersonalAiChatbotProject'))
+
+function PageFallback() {
+  return <div className="shell py-24 text-muted">Loading…</div>
 }
 
 export default function App() {
@@ -35,14 +34,27 @@ export default function App() {
       <ScrollToTop />
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projects/safe-rl-energy-hub" element={<EnergyHubProject />} />
-        <Route path="/projects/building-safe-rl-dpc" element={<BuildingSafeRlProject />} />
-        <Route path="/projects/rag-gpt-document-chatbot" element={<RagGptProject />} />
-        <Route path="/projects/snake-dqn-agent" element={<SnakeProject />} />
-        <Route path="/projects/personal-ai-chatbot" element={<PersonalAiChatbotProject />} />
-      </Routes>
+      <Suspense fallback={<PageFallback />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/publications" element={<PublicationsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+
+          <Route path="/projects/sd-dpc-sparse-dictionary-control" element={<SdDpcProject />} />
+          <Route path="/projects/dompark-energy-optimization" element={<DomparkProject />} />
+          <Route path="/projects/ahu-fault-detection" element={<AhuFaultDetectionProject />} />
+          <Route path="/projects/safe-rl-energy-hub" element={<EnergyHubProject />} />
+          <Route path="/projects/building-safe-rl-dpc" element={<BuildingSafeRlProject />} />
+          <Route path="/projects/rag-gpt-document-chatbot" element={<RagGptProject />} />
+          <Route path="/projects/snake-dqn-agent" element={<SnakeProject />} />
+          <Route path="/projects/personal-ai-chatbot" element={<PersonalAiChatbotProject />} />
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
 
       <Footer />
     </BrowserRouter>

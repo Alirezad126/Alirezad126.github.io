@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-label="Closed-loop HVAC control: EnergyPlus building wrapped as a Gym environment, an LSTM forecaster, and a DQN agent">
+  <defs>
+    <style>
+      .bg { fill: #0f1a1c; }
+      .box { fill: #15262a; stroke: #2dd4bf; stroke-width: 1.5; }
+      .box-soft { fill: #13211f; stroke: #2a4a4a; stroke-width: 1.5; }
+      .t { font-family: Inter, system-ui, sans-serif; fill: #e6f4f1; }
+      .title { font-size: 19px; font-weight: 600; }
+      .sub { font-size: 14px; fill: #8fb3ad; }
+      .lbl { font-size: 13px; fill: #2dd4bf; font-family: ui-monospace, Menlo, monospace; }
+      .flow { stroke: #2dd4bf; stroke-width: 2; fill: none; }
+      .flow-soft { stroke: #3f6f68; stroke-width: 2; fill: none; stroke-dasharray: 5 5; }
+    </style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#3f6f68"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="800" height="450"/>
+
+  <!-- EnergyPlus environment -->
+  <rect class="box" x="56" y="72" width="300" height="130" rx="12"/>
+  <text class="t title" x="80" y="112">EnergyPlus building</text>
+  <text class="t sub" x="80" y="140">wrapped as an OpenAI Gym</text>
+  <text class="t sub" x="80" y="162">environment for closed-loop control</text>
+  <text class="lbl" x="80" y="188">state: zone temp, loads, weather</text>
+
+  <!-- LSTM forecaster -->
+  <rect class="box-soft" x="56" y="268" width="300" height="118" rx="12"/>
+  <text class="t title" x="80" y="306">LSTM forecaster</text>
+  <text class="t sub" x="80" y="334">ambient air temperature</text>
+  <text class="t sub" x="80" y="356">and solar irradiance</text>
+
+  <!-- DQN agent -->
+  <rect class="box" x="470" y="150" width="274" height="150" rx="12"/>
+  <text class="t title" x="494" y="190">DQN agent</text>
+  <text class="t sub" x="494" y="218">sets the supply air flow rate,</text>
+  <text class="t sub" x="494" y="240">trading energy against comfort</text>
+  <text class="lbl" x="494" y="272">action: supply air flow</text>
+
+  <!-- state -> agent -->
+  <path class="flow" d="M356 120 H 420 V 198 H 462" marker-end="url(#a)"/>
+  <text class="lbl" x="366" y="110">state, reward</text>
+
+  <!-- forecast -> agent -->
+  <path class="flow-soft" d="M356 322 H 420 V 258 H 462" marker-end="url(#b)"/>
+  <text class="lbl" x="366" y="344" fill="#3f6f68">forecast</text>
+
+  <!-- agent -> environment -->
+  <path class="flow" d="M607 300 V 364 H 420 V 230 H 356" marker-end="url(#a)"/>
+  <text class="lbl" x="440" y="388">action</text>
+
+  <!-- result -->
+  <text class="t sub" x="56" y="424" font-size="15">Result:</text>
+  <text class="t" x="118" y="424" font-size="15" font-weight="600" fill="#2dd4bf">10% lower energy use</text>
+  <text class="t sub" x="282" y="424" font-size="15">than a rule-based controller, temperature in range</text>
+</svg>

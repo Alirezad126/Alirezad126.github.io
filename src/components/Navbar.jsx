@@ -1,71 +1,68 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import portfolio from '../data/portfolio'
 import ThemeToggle from './ThemeToggle'
 
 const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact', href: '#contact' }
+  { label: 'News', to: '/news' },
+  { label: 'Experience', to: '/experience' },
+  { label: 'Projects', to: '/projects' },
+  { label: 'Publications', to: '/publications' },
+  { label: 'Contact', to: '/contact' }
 ]
+
+function linkClass({ isActive }) {
+  return `text-[15px] font-medium transition-colors ${
+    isActive ? 'text-accent' : 'text-muted hover:text-accent'
+  }`
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll)
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const handleClick = () => {
     setIsOpen(false)
-  }
+  }, [pathname])
 
   return (
-    <header
-      className={`fixed left-0 top-0 z-50 w-full border-b transition ${
-        isScrolled
-          ? 'border-white/10 bg-slate-950/95 shadow-card backdrop-blur-xl dark:bg-ink/90'
-          : 'border-white/10 bg-slate-950/90 backdrop-blur-xl dark:bg-ink/70'
-      }`}
-    >
-      <nav className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a
-          href="#about"
-          onClick={handleClick}
-          className="font-mono text-sm font-bold tracking-wide text-white transition hover:text-accent"
+    <header className="sticky top-0 z-50 border-b border-line bg-ink/90 backdrop-blur">
+      <nav className="shell flex h-20 items-center justify-between gap-6">
+        <Link
+          to="/"
+          className="focus-ring flex items-center gap-3 rounded"
         >
-        </a>
+          <img
+            src={portfolio.avatar}
+            alt=""
+            width="36"
+            height="36"
+            className="h-9 w-9 rounded-full border border-line object-cover"
+          />
 
-        <div className="hidden items-center gap-8 md:flex">
+          <span className="text-base font-semibold tracking-tight text-heading">
+            {portfolio.name}
+          </span>
+        </Link>
+
+        <div className="hidden items-center gap-8 lg:flex">
           {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="font-mono text-xs font-bold uppercase tracking-[0.28em] text-slate-300 transition hover:text-accent"
-            >
+            <NavLink key={link.to} to={link.to} className={linkClass}>
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <ThemeToggle />
 
           <button
             type="button"
             onClick={() => setIsOpen((value) => !value)}
-            className="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-white shadow-card backdrop-blur-md transition hover:border-accent hover:text-accent md:hidden"
+            className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line text-heading lg:hidden"
             aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -73,21 +70,20 @@ export default function Navbar() {
       </nav>
 
       {isOpen && (
-        <div className="mx-auto w-full max-w-7xl px-4 pb-4 sm:px-6 md:hidden">
-          <div className="rounded-2xl border border-white/10 bg-slate-950/95 p-4 shadow-card backdrop-blur-xl">
-            <div className="flex flex-col gap-2">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={handleClick}
-                  className="rounded-xl px-4 py-3 font-mono text-xs font-bold uppercase tracking-[0.22em] text-slate-300 transition hover:bg-accent/10 hover:text-accent"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
+        <div className="shell grid gap-1 border-t border-line py-3 lg:hidden">
+          {links.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                `rounded-lg px-2 py-3 text-base font-medium ${
+                  isActive ? 'text-accent' : 'text-muted hover:text-accent'
+                }`
+              }
+            >
+              {link.label}
+            </NavLink>
+          ))}
         </div>
       )}
     </header>

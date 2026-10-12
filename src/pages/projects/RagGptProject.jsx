@@ -12,14 +12,12 @@ const steps = [
 
 export default function RagGptProject() {
   return (
-    <main className="relative overflow-hidden px-4 pt-28 pb-24 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute left-[-20%] top-[10%] h-96 w-96 rounded-full bg-accent/15 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-20%] bottom-[10%] h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+    <main className="shell py-12 sm:py-16">
 
-      <section className="relative mx-auto max-w-6xl">
+      <section className="relative">
         <Link
-          to="/#projects"
-          className="focus-ring inline-flex items-center gap-2 rounded-full border border-slate-400 bg-white/80 px-4 py-2 font-mono text-xs font-bold uppercase tracking-wide text-slate-800 shadow-card transition hover:border-accent hover:text-accent dark:border-line dark:bg-white/5 dark:text-muted"
+          to="/projects"
+          className="focus-ring inline-flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-accent"
         >
           <ArrowLeft size={16} />
           Back to Projects
@@ -27,13 +25,13 @@ export default function RagGptProject() {
 
 <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
   <div>
-    <p className="section-label">Full-Stack AI Application</p>
+    <p className="eyebrow">Full-Stack AI Application</p>
 
-    <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-[-0.04em] text-slate-950 sm:text-6xl dark:text-white">
+    <h1 className="mt-4 text-3xl font-bold tracking-tight text-heading sm:text-4xl">
       RAG-GPT Personalized Document Chatbot
     </h1>
 
-    <p className="mt-6 text-lg font-medium leading-8 text-slate-700 dark:text-muted">
+    <p className="mt-6 leading-7 text-muted">
       A retrieval-augmented chatbot that allows users to upload PDF
       documents and ask questions about their content.
     </p>
@@ -42,7 +40,7 @@ export default function RagGptProject() {
       {tags.map((tag) => (
         <span
           key={tag}
-          className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-wide text-emerald-800 dark:text-accent"
+          className="chip"
         >
           {tag}
         </span>
@@ -53,14 +51,14 @@ export default function RagGptProject() {
       href="https://github.com/Alirezad126/RAGBot"
       target="_blank"
       rel="noreferrer"
-      className="focus-ring mt-8 inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 font-bold text-slate-950 shadow-glow transition hover:-translate-y-1"
+      className="focus-ring mt-8 inline-flex items-center gap-2 btn-primary"
     >
       <Github size={18} />
       View GitHub
     </a>
   </div>
 
-  <div className="overflow-hidden rounded-3xl border border-slate-400 bg-white/90 shadow-card backdrop-blur-md dark:border-line dark:bg-white/[0.04]">
+  <div className="overflow-hidden rounded-xl border border-line bg-card">
     <img
       src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*jtNZIbJ_MQc6u2TVt9QQAA.png"
       alt="RAG GPT chatbot"
@@ -69,16 +67,16 @@ export default function RagGptProject() {
   </div>
 </div>
         <section className="mt-12 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl border border-slate-400 bg-white/90 p-6 shadow-card backdrop-blur-md sm:p-8 dark:border-line dark:bg-white/[0.04]">
-            <p className="section-label">How It Works</p>
+          <div className="rounded-xl border border-line bg-card p-6 sm:p-8">
+            <p className="eyebrow">How It Works</p>
 
             <ol className="mt-6 space-y-5">
               {steps.map((step, index) => (
                 <li
                   key={step}
-                  className="flex gap-4 font-medium text-slate-700 dark:text-muted"
+                  className="flex gap-4 font-medium text-muted"
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent font-bold text-slate-950 shadow-glow">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent font-semibold text-ink">
                     {index + 1}
                   </span>
 
@@ -88,10 +86,10 @@ export default function RagGptProject() {
             </ol>
           </div>
 
-          <div className="rounded-3xl border border-slate-400 bg-white/90 p-6 shadow-card backdrop-blur-md sm:p-8 dark:border-line dark:bg-white/[0.04]">
-            <p className="section-label">System Design</p>
+          <div className="rounded-xl border border-line bg-card p-6 sm:p-8">
+            <p className="eyebrow">System Design</p>
 
-            <p className="mt-6 font-medium leading-8 text-slate-700 dark:text-muted">
+            <p className="mt-6 font-medium leading-8 text-muted">
               The app uses a React frontend, FastAPI backend, LangChain pipeline,
               OpenAI language models, and a vector database for semantic retrieval.
               The application was containerized with Docker for easier deployment.

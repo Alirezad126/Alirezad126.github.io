@@ -1,6 +1,7 @@
-# Machine Learning Portfolio
+# Alireza Daneshvar — Portfolio
 
-A professional dark-theme Machine Learning portfolio built with React, Vite, and Tailwind CSS. The design uses a research-lab/hacker-terminal aesthetic with glass cards, electric teal accents, smooth scroll, animated section reveals, project filters, and responsive layouts.
+A small, fast, multi-page portfolio built with React, Vite, and Tailwind CSS.
+Light and dark themes, no animation libraries, no runtime CSS-in-JS.
 
 ## Run locally
 
@@ -9,75 +10,94 @@ npm install
 npm run dev
 ```
 
-Then open the local URL printed by Vite.
-
-## Build for production
+## Build
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Customize your content
+## Content
 
-Edit this file:
+`src/data/portfolio.js` is the single source of truth for every page. It holds:
 
-```bash
-src/data/portfolio.js
-```
+| Key | Used by |
+| --- | --- |
+| `name`, `fullName`, `role`, `bio`, `avatar`, `cvUrl` | Hero, Navbar, Footer |
+| `contact` | Hero, Contact page, Footer |
+| `news` | Home (latest 3) and `/news` |
+| `experience`, `education`, `skills` | `/experience` |
+| `projects` | Home (featured 3) and `/projects` |
+| `publications` | `/publications` |
 
-It is the single source of truth for the website content. Update:
+### Adding a news item
 
-- `name`, `tagline`, `bio`, `avatar`, and `cvUrl`
-- `skills`
-- `projects`
-- `experience`
-- `publications`
-- `contact`
-
-## Avatar and CV
-
-The template includes:
-
-```bash
-public/avatar.svg
-public/cv.pdf
-```
-
-Replace these with your own files. Keep the same names, or update `avatar` and `cvUrl` in `src/data/portfolio.js`.
-
-## Project filters
-
-Project filter tabs are generated automatically from the `tags` inside `portfolio.projects`. Add or remove tags in the data file and the UI updates automatically.
-
-## Publications section
-
-The publications section is conditional. If this array is empty, the section will not render:
+Put the newest entry first. `date` is `YYYY-MM` and renders as "Mon YYYY";
+`tag`, `body`, and `href` are optional.
 
 ```js
-publications: []
+{
+  date: '2026-11',
+  tag: 'Talk',
+  title: 'Invited talk at …',
+  body: 'One or two sentences.',
+  href: 'https://example.com'
+}
 ```
 
-## Main files
+### Adding a project
+
+Set `detail: true` only when the project has a write-up page under
+`src/pages/projects/` and a matching route in `src/App.jsx`. Set
+`imageFit: 'contain'` for diagrams and schematics, which must be letterboxed
+on white rather than cropped to the card's 16:9 frame. A project with no
+`image` at all falls back to a typographic tile built from its first tag.
+
+Write-ups are built from the shared primitives in `src/components/`:
+`ProjectLayout` (back link, title block, tags, links) with its `Section`,
+`InfoGrid`, and `Figure` exports, `DataTable` for results tables (a row may set
+`highlight: true`), and `Math` for `Equation`, `EquationGroup`, and
+`InlineMath`.
+
+## Routes
+
+```text
+/                       Hero, latest news, featured projects
+/news                   Full news timeline
+/experience             Work history, education, skills
+/projects               All projects, filterable by tag
+/publications           Papers and preprints
+/contact                Contact details
+/projects/<slug>        Individual project write-ups (code-split)
+                        sd-dpc-sparse-dictionary-control
+                        safe-rl-energy-hub
+                        building-safe-rl-dpc
+                        dompark-energy-optimization
+                        ahu-fault-detection
+                        rag-gpt-document-chatbot
+                        personal-ai-chatbot
+                        snake-dqn-agent
+```
+
+## Performance notes
+
+- Project write-ups are loaded with `React.lazy`, and all math goes through
+  `src/components/Math.jsx`, so KaTeX (~266 kB) is one shared chunk fetched
+  only by the pages that render equations.
+- One webfont family (Inter), applied through the Tailwind `sans` stack.
+- No backdrop blur on cards, no animated background layers, no scroll-reveal
+  observers — the page paints once and stays cheap to scroll.
+
+## Structure
 
 ```text
 src/
-├── components/
-│   ├── Navbar.jsx
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── Projects.jsx
-│   ├── ProjectCard.jsx
-│   ├── Skills.jsx
-│   ├── Experience.jsx
-│   ├── Publications.jsx
-│   ├── Contact.jsx
-│   └── Footer.jsx
+├── components/   Reusable sections (Hero, News, Projects, …)
+├── pages/        One file per route
+│   └── projects/ Long-form project write-ups
 ├── data/
 │   └── portfolio.js
-├── hooks/
-│   └── useInView.js
 ├── App.jsx
 ├── main.jsx
-└── index.css
+└── index.css     Theme tokens and component classes
 ```

@@ -5,101 +5,94 @@
 :root {
   color-scheme: light;
 
-  --color-ink: 232 238 244;
-  --color-surface: 255 255 255;
-  --color-surface-soft: 226 232 240;
-
+  --color-ink: 250 250 249;
+  --color-card: 255 255 255;
   --color-heading: 15 23 42;
-  --color-muted: 51 65 85;
-  --color-line: 148 163 184;
-
-  --color-accent: 0 170 120;
+  --color-muted: 71 85 105;
+  --color-line: 226 232 240;
+  --color-accent: 13 148 136;
 }
 
 .dark {
   color-scheme: dark;
 
-  --color-ink: 10 10 15;
-  --color-surface: 20 20 27;
-  --color-surface-soft: 255 255 255;
-
-  --color-heading: 255 255 255;
-  --color-muted: 160 166 178;
-  --color-line: 43 48 59;
-
-  --color-accent: 0 255 178;
+  --color-ink: 11 15 20;
+  --color-card: 20 26 33;
+  --color-heading: 241 245 249;
+  --color-muted: 148 163 184;
+  --color-line: 39 48 59;
+  --color-accent: 45 212 191;
 }
 
 html {
+  /* Slightly larger base so every rem-based size scales up with it. */
+  font-size: 17px;
   scroll-behavior: smooth;
+  /* Offset for the fixed header when jumping to an anchor. */
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: theme('fontFamily.body');
-  background:
-    radial-gradient(circle at top left, rgb(var(--color-accent) / 0.14), transparent 32rem),
-    radial-gradient(circle at bottom right, rgb(var(--color-accent) / 0.1), transparent 34rem),
-    rgb(var(--color-ink));
+  background: rgb(var(--color-ink));
   color: rgb(var(--color-muted));
+  font-family: theme('fontFamily.sans');
+  -webkit-font-smoothing: antialiased;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgb(var(--color-accent) / 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--color-accent) / 0.1) 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity: 0.80;
-}
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
 
-.dark body::before {
-  opacity: 0.35;
-}
+  .section {
+    @apply shell border-t border-line py-14 sm:py-16;
+  }
 
-.section-shell {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-}
+  /* A page's leading section needs no divider above it. */
+  main > .section:first-child {
+    @apply border-t-0;
+  }
 
-.section-label {
-  @apply font-mono text-base font-bold uppercase tracking-[0.35em] text-accent;
-}
+  .eyebrow {
+    @apply font-mono text-[13px] font-medium uppercase tracking-[0.2em] text-accent;
+  }
 
-.section-title {
-  @apply font-display text-3xl font-bold leading-tight tracking-[-0.04em] sm:text-5xl;
-  color: rgb(var(--color-heading));
-}
+  .h2 {
+    @apply mt-2 text-3xl font-semibold tracking-tight text-heading sm:text-4xl;
+  }
 
-.glass-card {
-  @apply border shadow-card backdrop-blur-xl;
-  border-color: rgb(var(--color-line));
-  background: rgb(var(--color-surface) / 0.9);
-}
+  .card {
+    @apply rounded-xl border border-line bg-card transition-colors duration-200;
+  }
 
-.dark .glass-card {
-  background: rgb(255 255 255 / 0.04);
-}
+  .chip {
+    @apply rounded-md border border-line px-2.5 py-1 text-[13px] font-medium text-muted;
+  }
 
-.focus-ring {
-  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
-  --tw-ring-color: rgb(var(--color-accent));
-  --tw-ring-offset-color: rgb(var(--color-ink));
-}
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors duration-200;
+  }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
+  .btn-primary {
+    @apply btn bg-accent text-ink hover:opacity-90;
+  }
 
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+  .btn-ghost {
+    @apply btn border border-line text-heading hover:border-accent hover:text-accent;
+  }
+
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+    --tw-ring-offset-color: rgb(var(--color-ink));
+  }
 }
 
 ::selection {

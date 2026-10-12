@@ -1,76 +1,93 @@
-import { ArrowUpRight, Github } from 'lucide-react'
+import { ArrowRight, Github } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function ProjectCard({ project, priority = false }) {
-  const projectPath = `/projects/${project.slug}`
+  const detailPath = project.detail ? `/projects/${project.slug}` : null
+  const hasCode = project.githubUrl && project.githubUrl !== '#'
+
+  // Diagrams are letterboxed on white; photos and screenshots fill the frame.
+  const isContain = project.imageFit === 'contain'
+
+  const Thumb = project.image ? (
+    <img
+      src={project.image}
+      alt=""
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
+      className={`aspect-[16/9] w-full border-b border-line ${
+        isContain ? 'bg-white object-contain p-3' : 'object-cover'
+      }`}
+    />
+  ) : (
+    <div className="flex aspect-[16/9] w-full items-center justify-center border-b border-line bg-accent/5 px-6">
+      <p className="text-center font-mono text-[13px] uppercase tracking-[0.2em] text-accent">
+        {project.tags?.[0]}
+      </p>
+    </div>
+  )
 
   return (
-    <article className="group flex h-full min-h-[500px] flex-col overflow-hidden rounded-3xl border border-slate-400 bg-white/90 shadow-card backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:border-accent dark:border-line dark:bg-white/[0.04]">
-      <Link
-        to={projectPath}
-        className="block overflow-hidden"
-        aria-label={`Open project details for ${project.title}`}
-      >
-        <div className="relative h-52 overflow-hidden border-b border-slate-300 bg-slate-100 dark:border-line dark:bg-white/[0.03]">
-          <img
-            src={project.image}
-            alt={project.title}
-            loading={priority ? 'eager' : 'lazy'}
-            decoding="async"
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-
-          {project.status && (
-            <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 font-mono text-xs font-bold uppercase text-slate-950 shadow-card">
-              {project.status}
-            </span>
-          )}
-        </div>
-      </Link>
-
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <Link to={projectPath}>
-          <h3 className="line-clamp-3 min-h-[78px] font-display text-lg font-bold leading-snug text-slate-950 transition group-hover:text-accent sm:text-xl dark:text-white">
-            {project.title}
-          </h3>
+    <article className="card group flex flex-col overflow-hidden hover:border-accent">
+      {detailPath ? (
+        <Link to={detailPath} tabIndex={-1} aria-hidden="true" className="block">
+          {Thumb}
         </Link>
+      ) : (
+        Thumb
+      )}
 
-        <p className="mt-3 line-clamp-4 min-h-[104px] text-sm font-medium leading-7 text-slate-700 dark:text-muted">
-          {project.description}
-        </p>
+      <div className="flex flex-1 flex-col p-6">
+        {project.status && (
+          <span className="self-start rounded-md bg-accent/10 px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wide text-accent">
+            {project.status}
+          </span>
+        )}
+
+        <h3 className="mt-3 text-lg font-semibold leading-snug text-heading group-hover:text-accent">
+          {detailPath ? (
+            <Link to={detailPath} className="focus-ring rounded">
+              {project.title}
+            </Link>
+          ) : (
+            project.title
+          )}
+        </h3>
+
+        <p className="mt-2.5 leading-7">{project.description}</p>
 
         <div className="mt-5 flex flex-wrap gap-2">
           {project.tags?.slice(0, 4).map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-emerald-800 dark:text-accent"
-            >
+            <span key={tag} className="chip">
               {tag}
             </span>
           ))}
         </div>
 
-        <div className="mt-auto flex items-center gap-3 pt-5">
-          {project.githubUrl && project.githubUrl !== '#' && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${project.title} GitHub repository`}
-              className="focus-ring rounded-full border border-slate-400 bg-white/80 p-2.5 text-slate-700 transition hover:border-accent hover:text-accent dark:border-line dark:bg-white/5 dark:text-muted"
-            >
-              <Github size={18} />
-            </a>
-          )}
+        {(detailPath || hasCode) && (
+          <div className="mt-auto flex items-center gap-5 border-t border-line pt-5">
+            {detailPath && (
+              <Link
+                to={detailPath}
+                className="focus-ring inline-flex items-center gap-1.5 rounded font-semibold text-accent hover:gap-2.5"
+              >
+                Details
+                <ArrowRight size={16} />
+              </Link>
+            )}
 
-          <Link
-            to={projectPath}
-            className="focus-ring inline-flex items-center gap-2 rounded-full border border-slate-400 bg-white/80 px-4 py-2 text-sm font-bold text-slate-900 transition hover:border-accent hover:text-accent dark:border-line dark:bg-white/5 dark:text-white"
-          >
-            View Details
-            <ArrowUpRight size={16} />
-          </Link>
-        </div>
+            {hasCode && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="focus-ring inline-flex items-center gap-1.5 rounded font-medium text-muted hover:text-accent"
+              >
+                <Github size={16} />
+                Code
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </article>
   )

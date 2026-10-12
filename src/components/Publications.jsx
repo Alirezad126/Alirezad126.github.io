@@ -1,76 +1,53 @@
 import { ArrowUpRight } from 'lucide-react'
 import portfolio from '../data/portfolio'
-import useInView from '../hooks/useInView'
 
 export default function Publications() {
-  const { ref, isVisible } = useInView()
+  const publications = portfolio.publications ?? []
 
-  if (!portfolio.publications || portfolio.publications.length === 0) {
-    return null
-  }
+  if (publications.length === 0) return null
 
   return (
-    <section
-      id="publications"
-      ref={ref}
-      className={`section-shell reveal pt-8 pb-12 sm:pt-12 sm:pb-20 lg:pt-16 lg:pb-24 ${
-        isVisible ? 'is-visible' : ''
-      }`}
-    >
-      <p className="section-label">Publications</p>
+    <section className="section">
+      <p className="eyebrow">Publications</p>
+      <h2 className="h2">Peer-reviewed work and preprints.</h2>
 
-      <h2 className="section-title mt-3 max-w-4xl">
-        Selected research outputs and manuscripts.
-      </h2>
-
-      <div className="mt-12 grid gap-5">
-        {portfolio.publications.map((publication) => {
+      <ul className="mt-10 grid gap-4">
+        {publications.map((publication) => {
           const hasUrl = publication.url && publication.url !== '#'
+          const Wrapper = hasUrl ? 'a' : 'div'
 
-          const content = (
-            <article className="group rounded-3xl border border-slate-400 bg-white/90 p-6 shadow-card backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-accent sm:p-7 dark:border-line dark:bg-white/[0.04]">
-              <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+          return (
+            <li key={publication.title}>
+              <Wrapper
+                {...(hasUrl
+                  ? { href: publication.url, target: '_blank', rel: 'noreferrer' }
+                  : {})}
+                className={`card group flex items-start justify-between gap-5 p-6 ${
+                  hasUrl ? 'focus-ring hover:border-accent' : ''
+                }`}
+              >
                 <div>
-                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-accent sm:text-xs">
-                    {publication.venue} · {publication.year}
-                  </p>
-
-                  <h3 className="mt-3 font-display text-xl font-bold leading-snug text-slate-950 sm:text-2xl dark:text-white">
+                  <h3 className="text-lg font-semibold leading-snug text-heading group-hover:text-accent">
                     {publication.title}
                   </h3>
+
+                  {publication.authors && (
+                    <p className="mt-2 text-[15px] leading-6">{publication.authors}</p>
+                  )}
+
+                  <p className="mt-2 font-mono text-[13px] text-muted">
+                    {publication.venue} · {publication.year}
+                  </p>
                 </div>
 
                 {hasUrl && (
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white/80 text-slate-700 transition group-hover:border-accent group-hover:text-accent dark:border-line dark:bg-white/5 dark:text-muted">
-                    <ArrowUpRight size={18} />
-                  </span>
+                  <ArrowUpRight size={20} className="mt-1 shrink-0 text-accent" />
                 )}
-              </div>
-            </article>
-          )
-
-          if (hasUrl) {
-            return (
-              <a
-                key={`${publication.title}-${publication.year}`}
-                href={publication.url}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Open publication: ${publication.title}`}
-                className="focus-ring block rounded-3xl"
-              >
-                {content}
-              </a>
-            )
-          }
-
-          return (
-            <div key={`${publication.title}-${publication.year}`}>
-              {content}
-            </div>
+              </Wrapper>
+            </li>
           )
         })}
-      </div>
+      </ul>
     </section>
   )
 }
