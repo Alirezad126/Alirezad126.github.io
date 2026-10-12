@@ -2,6 +2,9 @@ import { ArrowRight, Download, Github, Linkedin, Mail, MapPin } from 'lucide-rea
 import { Link } from 'react-router-dom'
 import portfolio from '../data/portfolio'
 
+// The hero greets with the first name only; the navbar carries the full one.
+const firstName = portfolio.name.split(' ')[0]
+
 const socials = [
   { label: 'GitHub', href: portfolio.contact.github, icon: Github },
   { label: 'LinkedIn', href: portfolio.contact.linkedin, icon: Linkedin },
@@ -28,8 +31,8 @@ export default function Hero() {
               Hi, I&apos;m
             </span>
 
-            <span className="mt-1 block font-display text-5xl leading-[1.05] tracking-tight text-accent sm:text-6xl">
-              {portfolio.name}
+            <span className="mt-1 block font-display text-6xl italic leading-[1.05] tracking-tight text-accent sm:text-7xl">
+              {firstName}
             </span>
           </h1>
 
