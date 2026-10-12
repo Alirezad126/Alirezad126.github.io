@@ -26,17 +26,12 @@ export default function Hero() {
         />
 
         <div className="min-w-0">
-          <h1 className="flex flex-wrap items-baseline gap-x-3">
-            <span className="text-lg font-medium text-muted sm:text-xl">
-              Hi, I&apos;m
-            </span>
-
-            <span className="font-display text-5xl italic leading-[1.1] tracking-tight text-accent sm:text-6xl">
-              {firstName}
-            </span>
+          <h1 className="font-display text-5xl font-bold leading-[0.98] tracking-tight sm:text-6xl">
+            <span className="block text-heading">Hi, I&apos;m</span>
+            <span className="name-gradient block">{firstName}</span>
           </h1>
 
-          <p className="eyebrow mt-3">{portfolio.role}</p>
+          <p className="eyebrow mt-3 font-bold">{portfolio.role}</p>
 
           <p className="mt-4 max-w-2xl leading-7">{portfolio.bio}</p>
 
