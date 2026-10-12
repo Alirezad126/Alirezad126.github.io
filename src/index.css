@@ -5,8 +5,9 @@
 :root {
   color-scheme: light;
 
-  /* Strength of the drifting background wash. */
-  --fx: 0.1;
+  /* Strength of the background bubbles: fill, highlight. */
+  --fx: 0.055;
+  --fx-hi: 0.11;
 
   --color-ink: 250 250 249;
   --color-card: 255 255 255;
@@ -19,7 +20,8 @@
 .dark {
   color-scheme: dark;
 
-  --fx: 0.16;
+  --fx: 0.05;
+  --fx-hi: 0.13;
 
   --color-ink: 11 15 20;
   --color-card: 20 26 33;
@@ -105,7 +107,7 @@ body {
   color: rgb(var(--color-heading));
 }
 
-/* --- Background drift (see src/components/BackgroundFX.jsx) --- */
+/* --- Background bubbles (see src/components/BackgroundFX.jsx) --- */
 
 .bg-fx {
   position: fixed;
@@ -116,59 +118,61 @@ body {
   contain: layout paint;
 }
 
-.bg-fx span {
+.bg-fx-bubble {
   position: absolute;
+  bottom: calc(var(--size) * -2);
+  left: var(--left);
+  width: var(--size);
+  height: var(--size);
+  animation: bubble-rise var(--rise) linear infinite;
+  animation-delay: var(--delay);
+  will-change: transform, opacity;
+}
+
+.bg-fx-bubble i {
   display: block;
+  width: 100%;
+  height: 100%;
   border-radius: 9999px;
-  background: radial-gradient(
-    circle at center,
-    rgb(var(--color-accent) / var(--fx)),
-    transparent 70%
-  );
+  background:
+    radial-gradient(
+      circle at 34% 30%,
+      rgb(var(--color-accent) / var(--fx-hi)),
+      rgb(var(--color-accent) / var(--fx)) 42%,
+      transparent 68%
+    );
+  animation: bubble-sway var(--sway) ease-in-out infinite alternate;
   will-change: transform;
 }
 
-.bg-fx-a {
-  top: -22vmax;
-  left: -14vmax;
-  width: 62vmax;
-  height: 62vmax;
-  animation: fx-drift-a 80s ease-in-out infinite alternate;
+@keyframes bubble-rise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -120vh, 0);
+    opacity: 0;
+  }
 }
 
-.bg-fx-b {
-  top: 28vmax;
-  right: -22vmax;
-  width: 54vmax;
-  height: 54vmax;
-  animation: fx-drift-b 105s ease-in-out infinite alternate;
-}
-
-.bg-fx-c {
-  bottom: -28vmax;
-  left: 24vmax;
-  width: 48vmax;
-  height: 48vmax;
-  animation: fx-drift-c 92s ease-in-out infinite alternate;
-}
-
-@keyframes fx-drift-a {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to { transform: translate3d(6vmax, 4vmax, 0) scale(1.12); }
-}
-
-@keyframes fx-drift-b {
-  from { transform: translate3d(0, 0, 0) scale(1.08); }
-  to { transform: translate3d(-7vmax, -5vmax, 0) scale(1); }
-}
-
-@keyframes fx-drift-c {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to { transform: translate3d(5vmax, -4vmax, 0) scale(1.1); }
+@keyframes bubble-sway {
+  from {
+    transform: translate3d(-2.2rem, 0, 0);
+  }
+  to {
+    transform: translate3d(2.2rem, 0, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bg-fx span {
-    animation: none;
+  .bg-fx {
+    display: none;
   }
 }
