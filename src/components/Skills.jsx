@@ -36,13 +36,13 @@ function TechMark({ name }) {
   )
 }
 
-export default function Skills() {
+export default function Skills({ inset = false }) {
   return (
-    <section className="section">
+    <section className={inset ? '' : 'section'}>
       <p className="eyebrow">Skills</p>
-      <h2 className="h2">Tools I reach for.</h2>
+      <h2 className={inset ? 'h3' : 'h2'}>Tools I reach for.</h2>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-2">
+      <div className={`mt-6 grid gap-5 ${inset ? '' : 'md:grid-cols-2'}`}>
         {portfolio.skills.map((group) => (
           <article key={group.category} className="card p-6">
             <h3 className="font-semibold text-heading">{group.category}</h3>

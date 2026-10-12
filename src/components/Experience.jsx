@@ -1,12 +1,12 @@
 import portfolio from '../data/portfolio'
 
-export default function Experience() {
+export default function Experience({ inset = false }) {
   return (
-    <section className="section">
+    <section className={inset ? '' : 'section'}>
       <p className="eyebrow">Experience</p>
-      <h2 className="h2">Research, optimization, and data engineering.</h2>
+      <h2 className={inset ? 'h3' : 'h2'}>Work history.</h2>
 
-      <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
+      <div className="mt-6 grid items-start gap-5">
         {portfolio.experience.map((job) => (
           <article key={`${job.company}-${job.period}`} className="card p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-x-5 gap-y-1">

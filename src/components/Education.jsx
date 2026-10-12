@@ -1,16 +1,16 @@
 import portfolio from '../data/portfolio'
 
-export default function Education() {
+export default function Education({ inset = false }) {
   const education = portfolio.education ?? []
 
   if (education.length === 0) return null
 
   return (
-    <section className="section">
+    <section className={inset ? '' : 'section'}>
       <p className="eyebrow">Education</p>
-      <h2 className="h2">Where I trained.</h2>
+      <h2 className={inset ? 'h3' : 'h2'}>Where I trained.</h2>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-2">
+      <div className={`mt-6 grid gap-5 ${inset ? '' : 'md:grid-cols-2'}`}>
         {education.map((item) => (
           <article key={item.school} className="card p-6">
             <h3 className="text-lg font-semibold text-heading">{item.degree}</h3>
