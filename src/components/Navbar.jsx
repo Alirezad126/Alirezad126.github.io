@@ -31,19 +31,9 @@ export default function Navbar() {
       <nav className="shell flex h-20 items-center justify-between gap-6">
         <Link
           to="/"
-          className="focus-ring flex items-center gap-3 rounded"
+          className="focus-ring rounded text-base font-semibold tracking-tight text-heading transition-colors hover:text-accent"
         >
-          <img
-            src={portfolio.avatar}
-            alt=""
-            width="36"
-            height="36"
-            className="h-9 w-9 rounded-full border border-line object-cover"
-          />
-
-          <span className="text-base font-semibold tracking-tight text-heading">
-            {portfolio.name}
-          </span>
+          {portfolio.name}
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">

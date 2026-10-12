@@ -133,7 +133,7 @@ body {
   left: -14vmax;
   width: 62vmax;
   height: 62vmax;
-  animation: fx-drift-a 34s ease-in-out infinite alternate;
+  animation: fx-drift-a 80s ease-in-out infinite alternate;
 }
 
 .bg-fx-b {
@@ -141,7 +141,7 @@ body {
   right: -22vmax;
   width: 54vmax;
   height: 54vmax;
-  animation: fx-drift-b 44s ease-in-out infinite alternate;
+  animation: fx-drift-b 105s ease-in-out infinite alternate;
 }
 
 .bg-fx-c {
@@ -149,7 +149,7 @@ body {
   left: 24vmax;
   width: 48vmax;
   height: 48vmax;
-  animation: fx-drift-c 38s ease-in-out infinite alternate;
+  animation: fx-drift-c 92s ease-in-out infinite alternate;
 }
 
 @keyframes fx-drift-a {
