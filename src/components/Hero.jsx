@@ -13,8 +13,8 @@ const socials = [
 
 export default function Hero() {
   return (
-    <section className="shell py-14 sm:py-20">
-      <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:gap-16">
+    <section className="shell py-10 sm:py-14">
+      <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:gap-14">
         <img
           src={portfolio.avatar}
           alt={portfolio.name}
@@ -22,25 +22,25 @@ export default function Hero() {
           height="180"
           fetchpriority="high"
           decoding="async"
-          className="h-32 w-32 shrink-0 rounded-full border border-line object-cover sm:h-44 sm:w-44"
+          className="h-28 w-28 shrink-0 rounded-full border border-line object-cover sm:h-36 sm:w-36"
         />
 
         <div className="min-w-0">
-          <h1>
-            <span className="block text-lg font-medium text-muted sm:text-xl">
+          <h1 className="flex flex-wrap items-baseline gap-x-3">
+            <span className="text-lg font-medium text-muted sm:text-xl">
               Hi, I&apos;m
             </span>
 
-            <span className="mt-1 block font-display text-6xl italic leading-[1.05] tracking-tight text-accent sm:text-7xl">
+            <span className="font-display text-5xl italic leading-[1.1] tracking-tight text-accent sm:text-6xl">
               {firstName}
             </span>
           </h1>
 
-          <p className="eyebrow mt-4">{portfolio.role}</p>
+          <p className="eyebrow mt-3">{portfolio.role}</p>
 
-          <p className="mt-5 max-w-2xl leading-7 sm:text-lg sm:leading-8">{portfolio.bio}</p>
+          <p className="mt-4 max-w-2xl leading-7">{portfolio.bio}</p>
 
-          <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px]">
+          <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px]">
             <span className="inline-flex items-center gap-1.5">
               <MapPin size={16} className="text-accent" />
               {portfolio.contact.location}
@@ -54,7 +54,7 @@ export default function Hero() {
             </span>
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link to="/projects" className="btn-primary focus-ring">
               View Projects
               <ArrowRight size={18} />
