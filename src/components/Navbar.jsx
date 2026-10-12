@@ -36,7 +36,7 @@ export default function Navbar() {
           {portfolio.name}
         </Link>
 
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-5 md:flex lg:gap-8">
           {links.map((link) => (
             <NavLink key={link.to} to={link.to} className={linkClass}>
               {link.label}
@@ -50,7 +50,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen((value) => !value)}
-            className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line text-heading lg:hidden"
+            className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line text-heading md:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
           >
@@ -60,7 +60,7 @@ export default function Navbar() {
       </nav>
 
       {isOpen && (
-        <div className="shell grid gap-1 border-t border-line py-3 lg:hidden">
+        <div className="shell grid gap-1 border-t border-line py-3 md:hidden">
           {links.map((link) => (
             <NavLink
               key={link.to}

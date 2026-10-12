@@ -6,7 +6,7 @@ import ProjectCard from './ProjectCard'
 
 export default function Projects({
   limit,
-  heading = 'Selected work.',
+  heading = 'Projects',
   showFilters = true,
   showMore = false
 }) {
@@ -41,10 +41,7 @@ export default function Projects({
   return (
     <section className="section">
       <div className="flex flex-wrap items-end justify-between gap-5">
-        <div>
-          <p className="eyebrow">Projects</p>
-          <h2 className="h2">{heading}</h2>
-        </div>
+        <h2 className="section-title">{heading}</h2>
 
         {showFilters && (
           <div className="flex flex-wrap gap-2">
@@ -67,7 +64,7 @@ export default function Projects({
         )}
       </div>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {filtered.map((project, index) => (
           <ProjectCard key={project.slug} project={project} priority={index < 2} />
         ))}

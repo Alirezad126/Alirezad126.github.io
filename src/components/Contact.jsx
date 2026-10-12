@@ -25,8 +25,7 @@ const links = [
 export default function Contact() {
   return (
     <section className="section">
-      <p className="eyebrow">Contact</p>
-      <h2 className="h2">Let&apos;s talk.</h2>
+      <h2 className="section-title">Contact</h2>
 
       <p className="mt-5 max-w-2xl leading-7 sm:text-lg sm:leading-8">
         Open to optimization and controls engineering, applied research, and
@@ -39,7 +38,7 @@ export default function Contact() {
         {portfolio.contact.location}
       </p>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {links.map(({ label, value, href, icon: Icon }) => (
           <a
             key={label}

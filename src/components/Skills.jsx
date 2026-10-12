@@ -50,8 +50,7 @@ function TechMark({ name }) {
 export default function Skills({ inset = false }) {
   return (
     <section className={inset ? '' : 'section'}>
-      <p className="eyebrow">Skills</p>
-      <h2 className={inset ? 'h3' : 'h2'}>Tools I reach for.</h2>
+      <h2 className={inset ? 'section-title-sm' : 'section-title'}>Skills</h2>
 
       <div className={`mt-6 grid gap-5 ${inset ? '' : 'md:grid-cols-2'}`}>
         {portfolio.skills.map((group) => (

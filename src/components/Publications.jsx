@@ -8,10 +8,9 @@ export default function Publications() {
 
   return (
     <section className="section">
-      <p className="eyebrow">Publications</p>
-      <h2 className="h2">Peer-reviewed work and preprints.</h2>
+      <h2 className="section-title">Publications</h2>
 
-      <ul className="mt-10 grid gap-4">
+      <ul className="mt-8 grid gap-4">
         {publications.map((publication) => {
           const hasUrl = publication.url && publication.url !== '#'
           const Wrapper = hasUrl ? 'a' : 'div'

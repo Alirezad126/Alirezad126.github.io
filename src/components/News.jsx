@@ -8,7 +8,7 @@ function formatDate(value) {
   return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-export default function News({ limit, heading = 'Latest news.', showMore = false }) {
+export default function News({ limit, heading = 'Latest news', showMore = false }) {
   const news = portfolio.news ?? []
 
   if (news.length === 0) return null
@@ -17,10 +17,9 @@ export default function News({ limit, heading = 'Latest news.', showMore = false
 
   return (
     <section className="section">
-      <p className="eyebrow">News</p>
-      <h2 className="h2">{heading}</h2>
+      <h2 className="section-title">{heading}</h2>
 
-      <ol className="mt-10 border-l border-line">
+      <ol className="mt-8 border-l border-line">
         {visible.map((item) => {
           const Wrapper = item.href ? 'a' : 'div'
 

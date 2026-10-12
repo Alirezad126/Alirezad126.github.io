@@ -3,8 +3,7 @@ import portfolio from '../data/portfolio'
 export default function Experience({ inset = false }) {
   return (
     <section className={inset ? '' : 'section'}>
-      <p className="eyebrow">Experience</p>
-      <h2 className={inset ? 'h3' : 'h2'}>Work history.</h2>
+      <h2 className={inset ? 'section-title-sm' : 'section-title'}>Experience</h2>
 
       <div className="mt-6 grid items-start gap-5">
         {portfolio.experience.map((job) => (

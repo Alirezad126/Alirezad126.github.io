@@ -77,7 +77,7 @@ body {
   }
 
   .section {
-    @apply shell border-t border-line py-14 sm:py-16;
+    @apply shell border-t border-line py-12 sm:py-14;
   }
 
   /* A page's leading section needs no divider above it. */
@@ -89,12 +89,21 @@ body {
     @apply font-mono text-[13px] font-medium uppercase tracking-[0.2em] text-accent;
   }
 
+  /* Section titles: the mono label is the heading. */
+  .section-title {
+    @apply font-mono text-2xl font-bold uppercase tracking-[0.12em] text-accent sm:text-3xl sm:tracking-[0.14em] md:text-4xl;
+  }
+
+  .section-title-sm {
+    @apply font-mono text-xl font-bold uppercase tracking-[0.12em] text-accent sm:text-2xl sm:tracking-[0.14em];
+  }
+
   .h2 {
-    @apply mt-2 text-3xl font-semibold tracking-tight text-heading sm:text-4xl;
+    @apply text-4xl font-semibold tracking-tight text-heading sm:text-5xl;
   }
 
   .h3 {
-    @apply mt-2 text-xl font-semibold tracking-tight text-heading;
+    @apply text-3xl font-semibold tracking-tight text-heading;
   }
 
   .card {

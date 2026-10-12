@@ -7,8 +7,7 @@ export default function Education({ inset = false }) {
 
   return (
     <section className={inset ? '' : 'section'}>
-      <p className="eyebrow">Education</p>
-      <h2 className={inset ? 'h3' : 'h2'}>Where I trained.</h2>
+      <h2 className={inset ? 'section-title-sm' : 'section-title'}>Education</h2>
 
       <div className={`mt-6 grid gap-5 ${inset ? '' : 'md:grid-cols-2'}`}>
         {education.map((item) => (
