@@ -62,45 +62,29 @@ const portfolio = {
 
   skills: [
     {
-      category: 'Optimization & Control',
-      items: [
-        'Mathematical Programming',
-        'MILP',
-        'Model Predictive Control',
-        'Differentiable Predictive Control',
-        'Safe Reinforcement Learning'
-      ]
+      category: 'Languages & Data',
+      items: ['Python', 'pandas', 'NumPy', 'SQL', 'PySpark']
     },
     {
-      category: 'Solvers & Modeling',
-      items: ['Pyomo', 'Gurobi', 'NeuroMANCER', 'EnergyPlus']
+      category: 'Optimization & Control',
+      items: ['Pyomo', 'Gurobi', 'CasADi', 'IPOPT', 'NeuroMANCER']
     },
     {
       category: 'Machine Learning',
-      items: [
-        'Time-Series Forecasting',
-        'Deep Learning',
-        'System Identification',
-        'Transformers'
-      ]
+      items: ['PyTorch', 'scikit-learn', 'OpenAI Gym', 'PySINDy', 'EnergyPlus']
     },
     {
-      category: 'Programming & Data',
+      category: 'Platforms & MLOps',
       items: [
-        'Python',
-        'SQL',
-        'PySpark',
+        'Git & CI/CD',
+        'Docker',
+        'MLflow',
         'Azure Databricks',
-        'pandas',
-        'NumPy',
-        'PyTorch',
-        'scikit-learn',
-        'Git'
+        'FastAPI',
+        'PostgreSQL',
+        'Snowflake',
+        'AWS'
       ]
-    },
-    {
-      category: 'Tracking & Deployment',
-      items: ['MLflow', 'Docker', 'FastAPI', 'CI/CD', 'AWS', 'PostgreSQL', 'Snowflake']
     }
   ],
 
