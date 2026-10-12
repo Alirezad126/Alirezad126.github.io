@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
+import BackgroundFX from './components/BackgroundFX'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import ScrollToTop from './components/ScrollToTop'
@@ -31,6 +32,7 @@ function PageFallback() {
 export default function App() {
   return (
     <BrowserRouter>
+      <BackgroundFX />
       <ScrollToTop />
       <Navbar />
 
