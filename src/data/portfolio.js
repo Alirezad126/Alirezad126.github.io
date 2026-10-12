@@ -2,10 +2,10 @@
 const portfolio = {
   name: 'Alireza Daneshvar',
   fullName: 'Alireza Daneshvar Garmroodi',
-  role: 'Optimization & Controls Engineer | Data Scientist',
-  bio: 'Optimization and controls engineer with an M.A.Sc. in building engineering, focused on energy storage dispatch and building energy systems. I translate operational problems into mathematical programs and constrained control policies using mathematical programming, model predictive control, differentiable predictive control, and reinforcement learning.',
+  role: 'Machine Learning Engineer | Control & Optimization',
+  bio: 'Machine learning engineer with 4+ years of research and industry experience across different fields. My focus is data-driven decision making, control, and optimization, and developing and maintaining production code.',
   bioLong:
-    'I write production code in Python, SQL, and PySpark, build optimization models with Pyomo and Gurobi, and track experiments in MLflow. Research at Johns Hopkins University and Concordia University has trained me to work independently on open-ended problems, from framing the model to delivering a tested result.',
+    'I write Python, SQL and PySpark, build optimization models with Pyomo and Gurobi, and track experiments in MLflow. Research at Johns Hopkins University and Concordia University has trained me to work independently on open-ended problems, from framing the model to delivering a tested result.',
   avatar: '/avatar.jpeg',
   cvUrl: '/cv.pdf',
 

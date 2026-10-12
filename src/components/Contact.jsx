@@ -28,9 +28,9 @@ export default function Contact() {
       <h2 className="section-title">Contact</h2>
 
       <p className="mt-5 max-w-2xl leading-7 sm:text-lg sm:leading-8">
-        Open to optimization and controls engineering, applied research, and
-        collaboration on constrained learning and control. Email is the fastest
-        way to reach me.
+        Open to machine learning engineering, applied research, and
+        collaboration on learning-based control. Email is the fastest way to
+        reach me.
       </p>
 
       <p className="mt-4 inline-flex items-center gap-2 text-[15px]">
