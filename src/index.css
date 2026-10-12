@@ -6,8 +6,8 @@
   color-scheme: light;
 
   /* Background points: halo and core strength. */
-  --fx: 0.085;
-  --fx-hi: 0.5;
+  --fx: 0.07;
+  --fx-hi: 0.34;
 
   /* Hero name gradient. */
   --grad-from: 13 148 136;
@@ -24,8 +24,8 @@
 .dark {
   color-scheme: dark;
 
-  --fx: 0.1;
-  --fx-hi: 0.7;
+  --fx: 0.085;
+  --fx-hi: 0.5;
 
   --grad-from: 45 212 191;
   --grad-to: 209 250 229;
