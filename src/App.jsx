@@ -7,12 +7,15 @@ import Navbar from './components/Navbar'
 import ScrollToTop from './components/ScrollToTop'
 
 import Home from './pages/Home'
-import ContactPage from './pages/ContactPage'
-import ExperiencePage from './pages/ExperiencePage'
-import NewsPage from './pages/NewsPage'
-import NotFound from './pages/NotFound'
-import ProjectsPage from './pages/ProjectsPage'
-import PublicationsPage from './pages/PublicationsPage'
+
+// Only the landing page is in the entry bundle. The rest are code-split, which
+// keeps things like the tech-icon paths off the first load.
+const NewsPage = lazy(() => import('./pages/NewsPage'))
+const ExperiencePage = lazy(() => import('./pages/ExperiencePage'))
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'))
+const PublicationsPage = lazy(() => import('./pages/PublicationsPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Project write-ups are code-split: they pull in KaTeX and long-form content
 // that the rest of the site never needs.
