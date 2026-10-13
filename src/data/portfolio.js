@@ -23,7 +23,7 @@ const portfolio = {
       tag: 'Preprint',
       title: 'Preprint: SD-DPC — Sparse Dictionary Differentiable Predictive Control',
       body: 'Submitted to the American Control Conference (ACC) 2027, with Ján Drgoňa.',
-      href: 'https://arxiv.org/abs/2610.02466'
+      href: 'https://solaris-jhu.github.io/SD-DPC-website/'
     },
     {
       date: '2026-07',
@@ -164,7 +164,7 @@ const portfolio = {
       authors: 'A. Daneshvar Garmroodi, J. Drgoňa',
       venue: 'Submitted to the American Control Conference (ACC)',
       year: '2027',
-      url: 'https://arxiv.org/abs/2610.02466'
+      url: 'https://solaris-jhu.github.io/SD-DPC-website/'
     },
     {
       title:

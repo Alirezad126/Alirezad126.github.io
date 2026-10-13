@@ -71,7 +71,7 @@ export default function SdDpcProject() {
       summary="A framework that learns sparse, interpretable feedback policies for nonlinear systems by differentiating a constrained predictive-control objective through a model identified from data — so the policy's terms are chosen by closed-loop performance, not by imitating a pretrained controller."
       tags={tags}
       links={[
-        { href: 'https://arxiv.org/abs/2610.02466', label: 'Read the preprint' },
+        { href: 'https://solaris-jhu.github.io/SD-DPC-website/', label: 'Project page' },
         {
           href: 'https://github.com/SOLARIS-JHU/SD-DPC',
           label: 'View code',
