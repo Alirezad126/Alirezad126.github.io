@@ -64,23 +64,15 @@ export default function ProjectLayout({
         </div>
 
         {figure && (
-          <figure className="overflow-hidden rounded-xl border border-line bg-card">
-            <img
-              src={figure.src}
-              alt={figure.alt}
-              loading="eager"
-              decoding="async"
-              className={`w-full ${
-                figure.contain ? 'bg-white object-contain p-4' : 'object-cover'
-              }`}
-            />
-
-            {figure.caption && (
-              <figcaption className="border-t border-line px-5 py-3 text-sm text-muted">
-                {figure.caption}
-              </figcaption>
-            )}
-          </figure>
+          <Figure
+            src={figure.src}
+            alt={figure.alt}
+            caption={figure.caption}
+            contain={figure.contain}
+            zoomable={figure.zoomable}
+            zoomHref={figure.zoomHref}
+            eager
+          />
         )}
       </header>
 
@@ -122,13 +114,21 @@ export function InfoGrid({ items }) {
  * A labelled figure with an optional caption. Set `zoomable` on dense figures
  * so the reader can open the full-resolution original in a new tab.
  */
-export function Figure({ src, alt, caption, contain = false, zoomable = false, zoomHref }) {
+export function Figure({
+  src,
+  alt,
+  caption,
+  contain = false,
+  zoomable = false,
+  zoomHref,
+  eager = false
+}) {
   const fullSrc = zoomHref ?? src
   const image = (
     <img
       src={src}
       alt={alt}
-      loading="lazy"
+      loading={eager ? 'eager' : 'lazy'}
       decoding="async"
       className={`w-full ${contain ? 'bg-white object-contain p-4' : 'object-cover'}`}
     />

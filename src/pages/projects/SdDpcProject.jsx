@@ -78,6 +78,14 @@ export default function SdDpcProject() {
           kind: 'github'
         }
       ]}
+      figure={{
+        src: '/projects/sddpc-method.png',
+        alt: 'SD-DPC workflow: sparse identification feeding differentiable predictive control policy learning',
+        caption: 'The SD-DPC workflow.',
+        contain: true,
+        zoomable: true,
+        zoomHref: '/projects/sddpc-method.pdf'
+      }}
     >
       <InfoGrid
         items={[
@@ -127,12 +135,6 @@ export default function SdDpcProject() {
           through that map.
         </p>
 
-        <Figure
-          src="/projects/sddpc-method.png"
-          alt="The SD-DPC method: sparse identification feeding differentiable predictive control policy learning"
-          caption="Both the SINDy prediction model and the sparse control policy are sparsified by the same thresholded gradient procedure."
-          contain
-        />
       </Section>
 
       <Section eyebrow="Stage one" title="Rollout-based sparse identification">
