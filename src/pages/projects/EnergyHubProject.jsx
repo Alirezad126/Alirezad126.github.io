@@ -79,7 +79,7 @@ export default function EnergyHubProject() {
           </p>
 
           <a
-            href="https://doi.org/10.1016/j.est.2022.105488"
+            href="https://doi.org/10.1016/j.est.2022.106147"
             target="_blank"
             rel="noreferrer"
             className="focus-ring mt-6 inline-flex items-center gap-2 btn-primary"
