@@ -56,7 +56,7 @@ const portfolio = {
       tag: 'Paper',
       title: 'Published in the Journal of Energy Storage',
       body: 'Optimal dispatch of an energy hub with compressed air energy storage using a safe reinforcement learning approach.',
-      href: 'https://doi.org/10.1016/j.est.2022.105488'
+      href:'https://doi.org/10.1016/j.est.2022.106147'
     }
   ],
 
@@ -187,7 +187,7 @@ const portfolio = {
       authors: 'A. Daneshvar Garmroodi, F. Nasiri, F. Haghighat',
       venue: 'Journal of Energy Storage',
       year: '2022',
-      url: 'https://doi.org/10.1016/j.est.2022.105488'
+      url: 'https://doi.org/10.1016/j.est.2022.106147'
     }
   ],
 
