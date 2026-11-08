@@ -20,42 +20,42 @@ const faults = [
     component: 'Outdoor air damper',
     mode: 'Stuck',
     cases: 'Fully open (100%), partially open (50%)',
-    ids: 'F1 – F2'
+    ids: 'F1 to F2'
   },
   {
     key: 'od-leak',
     component: 'Outdoor air damper',
     mode: 'Leaking',
     cases: '20% and 50% of max damper flow',
-    ids: 'F3 – F4'
+    ids: 'F3 to F4'
   },
   {
     key: 'hc-stuck',
     component: 'Heating coil valve',
     mode: 'Stuck',
     cases: 'Fully closed, fully open, partially open (50%)',
-    ids: 'F5 – F7'
+    ids: 'F5 to F7'
   },
   {
     key: 'hc-leak',
     component: 'Heating coil valve',
     mode: 'Leaking',
     cases: '5% and 40% of max coil valve',
-    ids: 'F8 – F9'
+    ids: 'F8 to F9'
   },
   {
     key: 'cc-stuck',
     component: 'Cooling coil valve',
     mode: 'Stuck',
     cases: 'Fully closed, fully open, partially open (50%)',
-    ids: 'F10 – F12'
+    ids: 'F10 to F12'
   },
   {
     key: 'cc-leak',
     component: 'Cooling coil valve',
     mode: 'Leaking',
     cases: '5% and 50% of max coil valve',
-    ids: 'F13 – F14'
+    ids: 'F13 to F14'
   },
   {
     key: 'uf',
@@ -150,7 +150,7 @@ export default function AhuFaultDetectionProject() {
         items={[
           {
             title: 'Problem',
-            text: 'HVAC uses 50–60% of building energy. Stuck dampers and leaking coil valves waste much of it, and go unnoticed until they become critical.'
+            text: 'HVAC uses 50 to 60% of building energy. Stuck dampers and leaking coil valves waste much of it, and go unnoticed until they become critical.'
           },
           {
             title: 'Method',

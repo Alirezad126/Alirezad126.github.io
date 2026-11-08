@@ -99,7 +99,7 @@ const portfolio = {
       company: 'Concordia University',
       role: 'Machine Learning Researcher',
       location: 'Montreal, QC, Canada',
-      period: 'Oct 2025 – Present',
+      period: 'Oct 2025 to Present',
       bullets: [
         'Build probabilistic models of well leakage risk from noisy time-series records with a hurdle (classify, then regress) model.',
         'Validation protocols checked against historical records, which exposed gaps in the underlying data. Presented at OMAE 2026.'
@@ -109,7 +109,7 @@ const portfolio = {
       company: 'Johns Hopkins University',
       role: 'Machine Learning Researcher',
       location: 'Remote, United States',
-      period: 'Feb 2025 – Present',
+      period: 'Feb 2025 to Present',
       bullets: [
         'Develop differentiable predictive control (DPC) methods that turn constrained optimization problems into control policies evaluated in a single forward pass, enabling fast real-time decisions.',
         'Design sparse, interpretable control policies with safe online adaptation, trained end to end through physics-based dynamics.',
@@ -121,7 +121,7 @@ const portfolio = {
       company: 'Concordia University',
       role: 'Research Assistant',
       location: 'Montreal, QC, Canada',
-      period: 'May 2021 – Apr 2023',
+      period: 'May 2021 to Apr 2023',
       bullets: [
         'Formulated energy hub dispatch with compressed air energy storage as a constrained scheduling problem that minimizes operating cost, solved with a safe deep RL method combining primal-dual optimization and imitation learning.',
         "Built regression surrogates that linearize the storage system's thermodynamics to keep long-horizon optimization tractable.",
@@ -132,7 +132,7 @@ const portfolio = {
       company: 'IranBar',
       role: 'Data Scientist',
       location: 'Tehran, Iran',
-      period: 'Jun 2019 – May 2020',
+      period: 'Jun 2019 to May 2020',
       bullets: [
         'Shipped price-prediction models into production, cutting quotation time 30% and raising agreement rates 25%.',
         'Built data pipelines with PySpark, pandas, and SQL to pre-process large-scale freight datasets for model training.',
@@ -147,14 +147,14 @@ const portfolio = {
       degree: 'M.A.Sc. in Building Engineering',
       note: 'GPA 4.1 / 4.3 · Outstanding Thesis',
       location: 'Montreal, QC, Canada',
-      period: 'Jan 2021 – Apr 2023'
+      period: 'Jan 2021 to Apr 2023'
     },
     {
       school: 'Iran University of Science and Technology',
       degree: 'B.A.Sc. in Mechanical Engineering',
       note: 'Ranked 5th in cohort',
       location: 'Tehran, Iran',
-      period: 'Sep 2016 – Aug 2020'
+      period: 'Sep 2016 to Aug 2020'
     }
   ],
 

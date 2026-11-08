@@ -19,7 +19,7 @@ const building = [
   { key: 'type', attribute: 'Building type', value: 'Mixed use' },
   { key: 'year', attribute: 'Construction year', value: '1908' },
   { key: 'heating', attribute: 'Existing heating system', value: 'Steam boiler' },
-  { key: 'canal', attribute: 'Distance to the canal', value: '90 – 95 m' },
+  { key: 'canal', attribute: 'Distance to the canal', value: '90 to 95 m' },
   { key: 'orient', attribute: 'Orientation', value: 'North-east' },
   { key: 'context', attribute: 'Surrounding neighbourhood', value: 'Residential' }
 ]

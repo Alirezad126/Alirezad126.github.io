@@ -85,7 +85,7 @@ export default function TryLiveRagGpt() {
     const data = await response.json().catch(() => ({}))
     if (!response.ok) {
       if (response.status === 429) {
-        throw new Error('The free tier is rate limited — try again in a minute.')
+        throw new Error('The free tier is rate limited. Try again in a minute.')
       }
       throw new Error(data.detail ?? `Request failed (${response.status})`)
     }
@@ -96,7 +96,7 @@ export default function TryLiveRagGpt() {
     if (!file) return
     setError(null)
     if (file.size > MAX_BYTES) {
-      setError('That PDF is over 4MB — the upload limit for this demo.')
+      setError('That PDF is over 4MB, which is the upload limit for this demo.')
       return
     }
     setStatus('uploading')
@@ -204,9 +204,9 @@ export default function TryLiveRagGpt() {
               <>
                 <p className="mt-4 text-sm leading-6 text-muted">
                   Upload a PDF under 4MB. It is split into passages and embedded
-                  on AWS Lambda, which takes a few seconds; then ask questions
+                  on AWS Lambda, which takes a few seconds. Then ask questions
                   and an open-weight model answers from the passages it retrieves.
-                  Nothing is kept — end the session and the document is deleted.
+                  Nothing is kept. End the session and the document is deleted.
                 </p>
 
                 <label className="mt-6 block">
@@ -219,10 +219,12 @@ export default function TryLiveRagGpt() {
                     {models.map((option) => (
                       <option key={option.id} value={option.id}>
                         {option.label}
-                        {option.detail ? ` — ${option.detail}` : ''}
                       </option>
                     ))}
                   </select>
+                  <span className="mt-2 block text-xs text-muted">
+                    {models.find((option) => option.id === model)?.detail}
+                  </span>
                 </label>
 
                 <label
@@ -295,8 +297,8 @@ export default function TryLiveRagGpt() {
                 >
                   {turns.length === 0 && (
                     <p className="my-auto text-center text-sm text-muted">
-                      Ask something the document actually covers — off-topic
-                      questions are declined by design.
+                      Ask something the document actually covers. Off-topic questions
+                      are declined by design.
                     </p>
                   )}
                   {turns.map((turn, index) => (

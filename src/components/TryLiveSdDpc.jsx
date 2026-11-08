@@ -777,7 +777,7 @@ function Panel() {
             ? ref.map((value, i) => (
                 <Slider
                   key={i}
-                  label={`setpoint, t = ${i * spec.segment}–${(i + 1) * spec.segment}`}
+                  label={`setpoint, t = ${i * spec.segment} to ${(i + 1) * spec.segment}`}
                   value={value}
                   bounds={spec.refBox[0]}
                   onChange={(next) => {
