@@ -126,6 +126,12 @@ body {
     @apply btn border border-line text-heading hover:border-accent hover:text-accent;
   }
 
+  /* The hero runs four actions plus the social icons, which wraps to a second
+     line at the default button size. */
+  .btn-compact {
+    @apply gap-1.5 px-3 py-2.5 text-[15px];
+  }
+
   .name-gradient {
     background-image: linear-gradient(
       100deg,

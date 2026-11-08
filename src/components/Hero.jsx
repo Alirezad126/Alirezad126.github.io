@@ -1,5 +1,4 @@
 import {
-  ArrowRight,
   Briefcase,
   Download,
   Github,
@@ -58,28 +57,27 @@ export default function Hero() {
             </span>
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link to="/projects#live" className="btn-primary focus-ring">
-              <Zap size={18} />
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            <Link to="/projects#live" className="btn-primary btn-compact focus-ring">
+              <Zap size={17} />
               Try live projects
             </Link>
 
-            <Link to="/projects" className="btn-ghost focus-ring">
+            <Link to="/projects" className="btn-ghost btn-compact focus-ring">
               View Projects
-              <ArrowRight size={18} />
             </Link>
 
-            <Link to="/experience" className="btn-ghost focus-ring">
-              <Briefcase size={18} />
+            <Link to="/experience" className="btn-ghost btn-compact focus-ring">
+              <Briefcase size={17} />
               Experience
             </Link>
 
-            <a href={portfolio.cvUrl} className="btn-ghost focus-ring">
-              <Download size={18} />
-              Download CV
+            <a href={portfolio.cvUrl} className="btn-ghost btn-compact focus-ring">
+              <Download size={17} />
+              CV
             </a>
 
-            <span className="mx-1 hidden h-7 w-px bg-line sm:block" aria-hidden="true" />
+            <span className="hidden h-7 w-px bg-line sm:block" aria-hidden="true" />
 
             {socials.map(({ label, href, icon: Icon }) => (
               <a
@@ -88,7 +86,7 @@ export default function Hero() {
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noreferrer' : undefined}
                 aria-label={label}
-                className="focus-ring rounded-lg border border-line p-3 text-muted transition-colors hover:border-accent hover:text-accent"
+                className="focus-ring rounded-lg border border-line p-2 text-muted transition-colors hover:border-accent hover:text-accent"
               >
                 <Icon size={18} />
               </a>

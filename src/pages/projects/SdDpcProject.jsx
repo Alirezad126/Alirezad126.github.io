@@ -69,7 +69,7 @@ export default function SdDpcProject() {
     <ProjectLayout
       eyebrow="Learning-Based Control"
       title="SD-DPC: Sparse Dictionary Differentiable Predictive Control"
-      summary="A framework that learns sparse, interpretable feedback policies for nonlinear systems by differentiating a constrained predictive-control objective through a model identified from data — so the policy's terms are chosen by closed-loop performance, not by imitating a pretrained controller."
+      summary="A framework that learns sparse, readable feedback policies for nonlinear systems by differentiating a constrained predictive-control objective through a model identified from data. The policy's terms are chosen by closed-loop performance rather than by imitating a pretrained controller."
       tags={tags}
       links={[
         { href: 'https://solaris-jhu.github.io/SD-DPC-website/', label: 'Project page' },
@@ -110,9 +110,9 @@ export default function SdDpcProject() {
         <p>
           Model predictive control optimizes closed-loop performance under state
           and input constraints, but it solves a constrained program at every
-          sampling instant — prohibitive on fast nonlinear systems or restricted
-          hardware. Differentiable predictive control (DPC) moves that cost
-          offline: it treats the optimal-control problem as an unsupervised
+          sampling instant, which is prohibitive on fast nonlinear systems or
+          restricted hardware. Differentiable predictive control (DPC) moves
+          that cost offline. It treats the optimal-control problem as an unsupervised
           learning problem and returns an explicit policy that is cheap to
           evaluate.
         </p>
@@ -122,8 +122,8 @@ export default function SdDpcProject() {
           deep networks, which distribute the control law across many coupled
           parameters and are hard to interpret, verify, modify, or adapt once
           deployed. SD-DPC keeps DPC&apos;s offline training but replaces the
-          network with a <em>sparse dictionary expansion</em> — a short, explicit
-          sum of known functions.
+          network with a <em>sparse dictionary expansion</em>, a short and
+          explicit sum of known functions.
         </p>
       </Section>
 
@@ -132,7 +132,7 @@ export default function SdDpcProject() {
           SD-DPC runs in two stages, both instances of the same sequentially
           thresholded gradient procedure applied to different losses. A sparse
           dynamics model is identified first from multistep rollout error,
-          giving a differentiable prediction map; a sparse dictionary policy is
+          giving a differentiable prediction map. A sparse dictionary policy is
           then trained by differentiating a finite-horizon closed-loop objective
           through that map.
         </p>
@@ -143,8 +143,8 @@ export default function SdDpcProject() {
         <p>
           A prediction model is identified first. SINDy writes the dynamics as a
           sparse combination of candidate functions collected in a library{' '}
-          <InlineMath math="\Theta(X, U)" /> — polynomial, trigonometric, and
-          state–input interaction terms — so that{' '}
+          <InlineMath math="\Theta(X, U)" />, built from polynomial,
+          trigonometric, and state-input interaction terms, so that{' '}
           <InlineMath math="\dot{X} \approx \Theta(X,U)\,\Xi" />.
         </p>
 
@@ -164,7 +164,7 @@ export default function SdDpcProject() {
         <p>
           With <InlineMath math="N_{\mathrm{id}} = 1" /> and an explicit Euler
           step this reduces to the usual{' '}
-          <InlineMath math="\ell_1" />-regularized SINDy regression; the
+          <InlineMath math="\ell_1" />-regularized SINDy regression. The
           multistep terms extend it by penalizing error accumulated along the
           rollout. On held-out trajectories the identified models reach 50-step
           rollout MSEs of{' '}
@@ -211,13 +211,13 @@ export default function SdDpcProject() {
 
         <Equation
           math="\gamma^{\epsilon}_i = \begin{cases} 1, & v_i \in \mathcal{V}_i \\ \epsilon, & v_i \notin \mathcal{V}_i \end{cases}"
-          caption="The forward pass evaluates the true saturated closed loop; only the gradient is relaxed."
+          caption="The forward pass evaluates the true saturated closed loop. Only the gradient is relaxed."
         />
 
         <p>
           The two extremes both fail. At <InlineMath math="\epsilon = 0" /> a
           coefficient feeding a saturated channel receives no gradient and only
-          shrinks, so thresholding acts on stale evidence; at{' '}
+          shrinks, so thresholding acts on stale evidence. At{' '}
           <InlineMath math="\epsilon = 1" /> a deeply saturated channel exerts
           influence through a sensitivity the plant does not have.
         </p>
@@ -251,8 +251,9 @@ export default function SdDpcProject() {
           In practice the certificate is tight enough to be useful: against
           automatic differentiation on a dense grid, the bound is conservative by
           a factor of at most <strong className="text-heading">1.7</strong>.
-          Training also terminates provably — a pruned coefficient is never
-          retained again, so the support stabilizes after finitely many changes.
+          Training also terminates provably, because a pruned coefficient is
+          never retained again, so the support stabilizes after finitely many
+          changes.
         </p>
       </Section>
 
@@ -269,10 +270,10 @@ export default function SdDpcProject() {
         <p>
           Three baselines: an IPOPT benchmark with exact model knowledge that
           solves each scenario online, NN-DPC (a two-layer MLP, the standard DPC
-          parameterization), and NN-Distilled — a sparse policy regressed onto
+          parameterization), and NN-Distilled, a sparse policy regressed onto
           NN-DPC&apos;s actions using exactly the terms SD-DPC retained. The last
-          one is the controlled comparison: same support, different training
-          objective.
+          one is the controlled comparison, with the same support but a
+          different training objective.
         </p>
 
         <DataTable
@@ -286,8 +287,8 @@ export default function SdDpcProject() {
         <p>
           Across all three systems the sparse policy evaluates in{' '}
           <strong className="text-heading">17 µs</strong> and occupies under{' '}
-          <strong className="text-heading">0.1 kB</strong> — roughly two orders
-          of magnitude less memory than NN-DPC, and far below the 18–26 MiB each
+          <strong className="text-heading">0.1 kB</strong>, roughly two orders
+          of magnitude less memory than NN-DPC, and far below the 18 to 26 MiB each
           IPOPT solve allocates. All figures below are means ± standard
           deviations over 500 held-out scenarios.
         </p>
@@ -301,7 +302,7 @@ export default function SdDpcProject() {
         <p>
           On the two-tank system SD-DPC retains six terms and tracks about{' '}
           <strong className="text-heading">twelve times</strong> more accurately
-          than NN-DPC — the sparse parameterization costs nothing in accuracy
+          than NN-DPC, so the sparse parameterization costs nothing in accuracy
           here. The distilled policy, on the same six terms, carries a steady
           offset and lands at seventeen times SD-DPC&apos;s loss.
         </p>
@@ -313,7 +314,7 @@ export default function SdDpcProject() {
         />
 
         <p>
-          Here SD-DPC is comparable to NN-DPC rather than better — what the
+          Here SD-DPC is comparable to NN-DPC rather than better. What the
           sparse parameterization adds is structure. The learned policy is three
           terms long:
         </p>
@@ -330,7 +331,7 @@ export default function SdDpcProject() {
           <InlineMath math="\dot{V} = (\mu + \kappa_2)x_2^2 - (\mu - \kappa_3)x_1^2 x_2^2 \le 0" />{' '}
           whenever <InlineMath math="\kappa_1 < 1" />,{' '}
           <InlineMath math="\kappa_2 < -\mu" />, and{' '}
-          <InlineMath math="\kappa_3 \le \mu" /> — conditions the learned
+          <InlineMath math="\kappa_3 \le \mu" />, conditions the learned
           coefficients satisfy. The origin of the unsaturated closed loop is
           therefore globally asymptotically stable, proved directly from the
           learned numbers.
@@ -347,8 +348,8 @@ export default function SdDpcProject() {
           around the obstacle from every sampled initial condition with
           cumulative control effort within{' '}
           <strong className="text-heading">0.6%</strong> of the IPOPT minimum.
-          The distilled policy — identical terms, fitted to a near-optimal
-          teacher — violates the obstacle in{' '}
+          The distilled policy, built from identical terms but fitted to a
+          near-optimal teacher, violates the obstacle in{' '}
           <strong className="text-heading">60.8%</strong> of scenarios, to a
           depth of 1.61.
         </p>
@@ -358,7 +359,7 @@ export default function SdDpcProject() {
           0.08 on states the teacher visits, but reaches 0.35 on states the{' '}
           <em>student</em> visits. For the bound to certify that the student
           inherits the teacher&apos;s constraint satisfaction, the teacher would
-          need a margin of about 1.05 — and the near-optimal teacher clears the
+          need a margin of about 1.05, and the near-optimal teacher clears the
           obstacle by only 0.06. Nothing absorbs the imitation error.
         </p>
 
@@ -379,8 +380,8 @@ export default function SdDpcProject() {
           symbolic structure for stronger guarantees: hard feasibility through
           safety filters, systematic region-of-attraction certification,
           robustness bounds under identification error, and conditions under
-          which sparsification provably preserves stability — plus noisy data,
-          library mismatch, and online adaptation of the retained coefficients
+          which sparsification provably preserves stability, along with noisy
+          data, library mismatch, and online adaptation of the retained coefficients
           after deployment.
         </p>
 

@@ -59,7 +59,7 @@ const faults = [
   },
   {
     key: 'uf',
-    component: '—',
+    component: 'n/a',
     mode: 'Unfaulted',
     cases: 'Normal operation',
     ids: 'UF'
@@ -87,7 +87,7 @@ const hyperparameters = [
     method: 'k-Nearest Neighbors (KNN)',
     params: 'n_neighbors = 3, weights = distance'
   },
-  { key: 'gnb', method: 'Gaussian Naïve Bayes (GNB)', params: '—' }
+  { key: 'gnb', method: 'Gaussian Naïve Bayes (GNB)', params: 'defaults' }
 ]
 
 const columns = [
@@ -158,7 +158,7 @@ export default function AhuFaultDetectionProject() {
           },
           {
             title: 'Result',
-            text: 'SVC reaches 0.77 mean accuracy under 10-fold CV and 0.88 on the rebalanced dataset — the strongest of the five on both.'
+            text: 'SVC reaches 0.77 mean accuracy under 10-fold CV and 0.88 on the rebalanced dataset, the strongest of the five on both.'
           }
         ]}
       />
@@ -171,7 +171,7 @@ export default function AhuFaultDetectionProject() {
           March and 1 April 2017. It holds{' '}
           <strong className="text-heading">21,600 samples</strong> at one-minute
           resolution across{' '}
-          <strong className="text-heading">15 attributes</strong> — air
+          <strong className="text-heading">15 attributes</strong>: air
           temperatures at four points in the unit, heating and cooling setpoints,
           fan status and speed, four damper and valve control signals, and an
           occupancy indicator.
@@ -180,8 +180,8 @@ export default function AhuFaultDetectionProject() {
         <p>
           The shipped ground-truth column is binary: faulted or not. Since each
           fault was injected on a known date, I added a{' '}
-          <em>type of fault</em> column with fifteen categories — fourteen fault
-          classes plus the unfaulted class — which turns detection into diagnosis
+          <em>type of fault</em> column with fifteen categories, fourteen fault
+          classes plus the unfaulted class. That turns detection into diagnosis
           and, as a side effect, balances a dataset that was heavily skewed
           toward faulty samples.
         </p>
@@ -287,9 +287,9 @@ export default function AhuFaultDetectionProject() {
           On a single split, SVC, RF, and KNN are indistinguishable at 0.99. The
           folds separate them: SVC holds{' '}
           <strong className="text-heading">0.77</strong> mean accuracy against
-          0.72 for KNN, 0.70 for RF, and 0.61 for DT — the decision tree loses
+          0.72 for KNN, 0.70 for RF, and 0.61 for DT. The decision tree loses
           more than a third of its apparent accuracy. GNB fails outright at 0.27,
-          which is expected: it assumes the attributes are conditionally
+          which is expected, because it assumes the attributes are conditionally
           independent, and in an air handling unit the four temperatures and the
           valve signals are anything but.
         </p>
@@ -307,10 +307,11 @@ export default function AhuFaultDetectionProject() {
           The fifteen-class dataset is balanced, but it is not realistic: a real
           air handling unit runs unfaulted almost all of the time. Training on a
           dataset that is mostly faulty teaches a model the wrong prior. Two
-          fixes were considered — adding noise to the unfaulted data to
-          synthesise more of it, or down-sampling the faults. The first is
-          delicate, since the attributes have very different operating ranges, so
-          the second was used: 100 samples from each fault class against the
+          fixes were considered. One was adding noise to the unfaulted data to
+          synthesise more of it, the other was down-sampling the faults. The
+          first is delicate, since the attributes have very different operating
+          ranges, so the second was used: 100 samples from each fault class
+          against the
           1,440 real unfaulted points.
         </p>
 
@@ -321,7 +322,7 @@ export default function AhuFaultDetectionProject() {
         />
 
         <p>
-          Every model drops, which is the point — these numbers are the honest
+          Every model drops, which is the point. These numbers are the honest
           ones. SVC degrades least, improving to{' '}
           <strong className="text-heading">0.88</strong> mean CV accuracy with an
           F1 of 0.90, and RF stays close behind at 0.81 and 0.90.
@@ -357,10 +358,11 @@ export default function AhuFaultDetectionProject() {
           The four air temperatures carry{' '}
           <strong className="text-heading">75%</strong> of the total importance,
           while the fan status and speed signals contribute essentially nothing.
-          Removing the six least important features leaves accuracy unchanged;
-          dropping six features by correlation instead caps accuracy at 0.71. RF
-          weighting is the more reliable selector, and SVC is the model most
-          sensitive to removing features at all — even strongly correlated ones.
+          Removing the six least important features leaves accuracy unchanged,
+          while dropping six features by correlation instead caps accuracy at
+          0.71. RF weighting is the more reliable selector, and SVC is the model
+          most sensitive to removing features at all, even strongly correlated
+          ones.
         </p>
 
         <Figure
@@ -383,8 +385,8 @@ export default function AhuFaultDetectionProject() {
           season. The unit is single-zone and constant volume, while most real
           installations are multi-zone with variable air volume. And because an
           AHU cycles on and off, it spends much of its time in transient
-          conditions that a steady-state classifier is not built to represent — a
-          transient or hybrid model is the natural next step.
+          conditions that a steady-state classifier is not built to represent.
+          A transient or hybrid model is the natural next step.
         </p>
 
         <p className="text-sm text-muted">

@@ -29,7 +29,7 @@ const scenarios = [
     key: 's1',
     scenario: 'Scenario 1',
     assets: 'Gas boiler + grid',
-    role: 'Baseline — the system as built, heat from gas, electricity from Hydro-Québec.'
+    role: 'Baseline. The system as built, heat from gas, electricity from Hydro-Québec.'
   },
   {
     key: 's2',
@@ -90,9 +90,9 @@ export default function DomparkProject() {
 
       <Section eyebrow="Case study" title="The Dompark complex, Montreal">
         <p>
-          Dompark is a 1908 mixed-use complex on the Lachine Canal in Montreal —
-          the former Mount Royal Spinning Mill — heated today by a steam boiler
-          system. Its size and age make it a useful test case: the loads are
+          Dompark is a 1908 mixed-use complex on the Lachine Canal in Montreal,
+          the former Mount Royal Spinning Mill, heated today by a steam boiler
+          system. Its size and age make it a useful test case. The loads are
           large, the heating system is a candidate for electrification, and the
           site is adding electric-vehicle charging, which changes the shape of
           the electrical load rather than just its magnitude.
@@ -169,7 +169,7 @@ export default function DomparkProject() {
         </p>
 
         <p>
-          The objective minimizes the cost of energy bought over the year — grid
+          The objective minimizes the cost of energy bought over the year: grid
           electricity at the Hydro-Québec tariff{' '}
           <InlineMath math="c^{\mathrm{el}}_t" /> and natural gas at{' '}
           <InlineMath math="c^{\mathrm{gas}}_t" />:
@@ -214,17 +214,17 @@ export default function DomparkProject() {
           <InlineMath math="P^{\mathrm{HP}}_t" /> to deliver heat{' '}
           <InlineMath math="Q^{\mathrm{HP}}_t = \mathrm{COP}_t \, P^{\mathrm{HP}}_t" />
           , with a coefficient of performance that follows Montreal&apos;s hourly
-          outdoor temperature — so the configuration is cheapest to run exactly
+          outdoor temperature, so the configuration is cheapest to run exactly
           when the building needs the least heat.
         </p>
       </Section>
 
       <Section eyebrow="Scenarios" title="Five configurations, one model">
         <p>
-          Every scenario reuses the same demand profiles and the same objective;
-          only the set of available units changes. That keeps the comparison
-          honest — a difference in annual cost comes from the configuration, not
-          from a different model.
+          Every scenario reuses the same demand profiles and the same objective.
+          Only the set of available units changes. That keeps the comparison
+          honest, because a difference in annual cost comes from the
+          configuration rather than from a different model.
         </p>
 
         <DataTable
@@ -247,7 +247,7 @@ export default function DomparkProject() {
         </p>
 
         <p>
-          The remaining steps are economic rather than structural — collecting
+          The remaining steps are economic rather than structural: collecting
           investment costs for the equipment in each scenario, and scoring the
           configurations on operating cost, investment cost, and CO₂ emissions
           together rather than on operating cost alone.

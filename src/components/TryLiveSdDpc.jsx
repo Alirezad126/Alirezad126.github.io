@@ -868,7 +868,7 @@ function Panel() {
       <p className="mt-3 text-[11px] leading-5 text-muted">
         Everything above runs in this page: the retained coefficients are{' '}
         {policyBytes(spec)} bytes, and the plant is the <em>true</em> nonlinear
-        system integrated with RK4 — not the identified model the policy was
+        system integrated with RK4, not the identified model the policy was
         trained against, so the mismatch is included. The sliders are bounded by
         the regions the policy was actually trained over.
       </p>

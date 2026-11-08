@@ -3,7 +3,7 @@ const portfolio = {
   name: 'Alireza Daneshvar',
   fullName: 'Alireza Daneshvar Garmroodi',
   role: 'Machine Learning Engineer | Control & Optimization',
-  bio: 'Machine learning engineer with 4+ years of research and industry experience across different fields. My focus is data-driven decision making, control, and optimization, and developing and maintaining production code.',
+  bio: 'Machine learning engineer with over four years of research and industry experience. I work on data-driven decision making, control, and optimization, and I write code that other people can maintain.',
   bioLong:
     'I write Python, SQL and PySpark, build optimization models with Pyomo and Gurobi, and track experiments in MLflow. Research at Johns Hopkins University and Concordia University has trained me to work independently on open-ended problems, from framing the model to delivering a tested result.',
   avatar: '/avatar.jpeg',
@@ -21,7 +21,7 @@ const portfolio = {
     {
       date: '2026-10',
       tag: 'Preprint',
-      title: 'Preprint: SD-DPC — Sparse Dictionary Differentiable Predictive Control',
+      title: 'Preprint out: Sparse Dictionary Differentiable Predictive Control',
       body: 'Submitted to the American Control Conference (ACC) 2027, with Ján Drgoňa.',
       href: 'https://solaris-jhu.github.io/SD-DPC-website/'
     },
@@ -102,7 +102,7 @@ const portfolio = {
       period: 'Oct 2025 – Present',
       bullets: [
         'Build probabilistic models of well leakage risk from noisy time-series records with a hurdle (classify, then regress) model.',
-        'Define validation protocols against historical records that expose gaps in the underlying data; presented at OMAE 2026.'
+        'Validation protocols checked against historical records, which exposed gaps in the underlying data. Presented at OMAE 2026.'
       ]
     },
     {
@@ -125,7 +125,7 @@ const portfolio = {
       bullets: [
         'Formulated energy hub dispatch with compressed air energy storage as a constrained scheduling problem that minimizes operating cost, solved with a safe deep RL method combining primal-dual optimization and imitation learning.',
         "Built regression surrogates that linearize the storage system's thermodynamics to keep long-horizon optimization tractable.",
-        'Benchmarked against MILP and deep RL, within 2.7% of optimal cost; published in the Journal of Energy Storage.'
+        'Benchmarked against MILP and deep RL, landing within 2.7% of optimal cost. Published in the Journal of Energy Storage.'
       ]
     },
     {
@@ -199,8 +199,8 @@ const portfolio = {
       live: true,
       title: 'SD-DPC: Sparse Dictionary Differentiable Predictive Control',
       description:
-        'Sparse, interpretable feedback policies learned by differentiating a constrained predictive-control objective through a SINDy model — constraints satisfied on every benchmark at 17 µs and under 0.1 kB per policy.',
-      tags: ['Differentiable Predictive Control', 'SINDy', 'NeuroMANCER', 'PyTorch'],
+        'Feedback policies that stay small enough to read, learned by differentiating a control objective through a model identified from data. Every benchmark met its constraints, at 17 µs per step and under 0.1 kB per policy.',
+      tags: ['Control', 'Machine Learning', 'PyTorch'],
       image: '/projects/sddpc-method.png',
       imageFit: 'contain',
       status: 'Preprint',
@@ -211,8 +211,8 @@ const portfolio = {
       detail: true,
       title: 'Optimal Dispatch of an Energy Hub with Compressed Air Energy Storage',
       description:
-        'M.A.Sc. thesis. Energy hub dispatch posed as a constrained scheduling problem and solved with safe deep RL, within 2.7% of the MILP optimum.',
-      tags: ['Safe RL', 'Optimization', 'Energy Systems', 'PyTorch'],
+        'My M.A.Sc. thesis. Energy hub dispatch posed as a constrained scheduling problem and solved with safe deep reinforcement learning, landing within 2.7% of the MILP optimum.',
+      tags: ['Reinforcement Learning', 'Optimization', 'Energy', 'PyTorch'],
       image: '/projects/energy-hub.png',
       status: 'Research',
       githubUrl: '#'
@@ -222,8 +222,8 @@ const portfolio = {
       detail: true,
       title: 'Building Control With Safe RL and Differentiable Predictive Control',
       description:
-        'Primal-dual DDPG and a DPC policy trained through a differentiable building model, compared on energy use and constraint violations. Released as a NeuroMANCER example.',
-      tags: ['Safe RL', 'DPC', 'NeuroMANCER', 'PyTorch'],
+        'Two controllers trained through a differentiable building model and compared on energy use and comfort violations. The work was released as a NeuroMANCER example.',
+      tags: ['Reinforcement Learning', 'Control', 'Energy', 'PyTorch'],
       image: '/projects/building-safe-rl.jpg',
       status: 'Open Source',
       githubUrl:
@@ -234,8 +234,8 @@ const portfolio = {
       detail: true,
       title: 'Operational Cost Optimization of the Dompark Complex Energy System',
       description:
-        'A Pyomo mathematical program over a full year of load data: unit outputs, energy-balance constraints, and capacity limits across candidate system configurations.',
-      tags: ['Optimization', 'Pyomo', 'Energy Systems'],
+        'A Pyomo model run over a full year of load data, covering unit outputs, energy balance, and capacity limits for each candidate system configuration.',
+      tags: ['Optimization', 'Energy', 'Python'],
       image: '/projects/dompark-building.jpg',
       status: 'Project',
       githubUrl: '#'
@@ -244,8 +244,8 @@ const portfolio = {
       slug: 'hvac-rl-forecast-control',
       title: 'Optimal HVAC Control With Reinforcement Learning and Forecast Inputs',
       description:
-        'An EnergyPlus building wrapped as a Gym environment, an LSTM forecasting weather inputs, and a DQN agent setting supply air flow — 10% less energy than a rule-based controller.',
-      tags: ['Reinforcement Learning', 'EnergyPlus', 'PyTorch'],
+        'An EnergyPlus building wrapped as a Gym environment, with an LSTM forecasting weather and a DQN agent setting supply air flow. It used 10% less energy than the rule-based controller.',
+      tags: ['Reinforcement Learning', 'Control', 'Energy', 'PyTorch'],
       image: '/projects/hvac-rl-control.svg',
       status: 'Project',
       githubUrl: '#'
@@ -255,8 +255,8 @@ const portfolio = {
       detail: true,
       title: 'Fault Detection and Diagnosis of an HVAC Air Handling Unit',
       description:
-        'Supervised classification on real single-zone HVAC sensor data, comparing Decision Tree, Random Forest, SVM, KNN, and Naive Bayes under k-fold validation and ROC/AUC.',
-      tags: ['Machine Learning', 'scikit-learn'],
+        'Supervised classification on real HVAC sensor data from a single zone. Five models were compared under k-fold validation, scored on accuracy and ROC curves.',
+      tags: ['Machine Learning', 'Python'],
       image: '/projects/ahu-schematic.png',
       imageFit: 'contain',
       status: 'Project',
@@ -267,8 +267,8 @@ const portfolio = {
       detail: true,
       title: 'RAG-GPT: Personalized Document Query Chatbot',
       description:
-        'A retrieval-augmented chatbot that lets users upload PDFs and query their content, built with LangChain, FastAPI, and a vector store.',
-      tags: ['RAG', 'LangChain', 'FastAPI'],
+        'A chatbot that answers questions about PDFs you upload, retrieving the relevant passages before it answers so the replies stay grounded in the document.',
+      tags: ['Machine Learning', 'Python'],
       image:
         'https://miro.medium.com/v2/resize:fit:4800/format:webp/1*jtNZIbJ_MQc6u2TVt9QQAA.png',
       status: 'Live',
@@ -279,8 +279,8 @@ const portfolio = {
       detail: true,
       title: 'AI Chatbot with Retrieval-Augmented Generation',
       description:
-        'A personalized assistant that answers questions about my work from portfolio and document data.',
-      tags: ['RAG', 'Chatbot', 'Vector Database'],
+        'An assistant that answers questions about my work, reading from my portfolio and documents rather than guessing.',
+      tags: ['Machine Learning', 'Python'],
       image: '/projects/chatbot_title.jpg',
       status: 'Live',
       githubUrl: '#'
@@ -292,7 +292,7 @@ const portfolio = {
       live: true,
       title: 'Reinforcement Learning Agent Playing PySnake',
       description:
-        'A DQN agent that learns to play a Snake environment autonomously.',
+        'A deep Q-network that learned to play Snake on its own. Pick a board size and watch it play a full game.',
       tags: ['Reinforcement Learning', 'PyTorch'],
       image: 'https://www.coolmathgames.com/sites/default/files/Snake_OG-logo.jpg',
       githubUrl: '#'
