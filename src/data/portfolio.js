@@ -215,7 +215,7 @@ const portfolio = {
       tags: ['Reinforcement Learning', 'Optimization', 'Energy', 'PyTorch'],
       image: '/projects/energy-hub.png',
       status: 'Research',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/Alirezad126/PD-DDPGfD'
     },
     {
       slug: 'building-safe-rl-dpc',

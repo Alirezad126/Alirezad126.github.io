@@ -18,7 +18,7 @@ export default {
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
       },
       maxWidth: {
-        content: '72rem'
+        content: '60rem'
       }
     }
   },

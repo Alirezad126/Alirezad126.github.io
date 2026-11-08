@@ -93,7 +93,7 @@ export function Section({ eyebrow, title, children }) {
         {title}
       </h2>
 
-      <div className="mt-5 grid gap-5 leading-8">{children}</div>
+      <div className="mt-5 grid gap-5 leading-8 [&>p]:max-w-[68ch]">{children}</div>
     </section>
   )
 }
