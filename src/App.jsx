@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
+import AskMeBot from './components/AskMeBot'
 import BackgroundFX from './components/BackgroundFX'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
@@ -62,6 +63,7 @@ export default function App() {
       </Suspense>
 
       <Footer />
+      <AskMeBot />
     </BrowserRouter>
   )
 }

@@ -1,7 +1,7 @@
 import { ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-const tags = ['RAG', 'OpenAI', 'Vector Database', 'React', 'FastAPI']
+const tags = ['RAG', 'AWS Lambda', 'Open-Weight Models', 'React', 'FastAPI']
 
 export default function PersonalAiChatbotProject() {
   return (
@@ -25,8 +25,10 @@ export default function PersonalAiChatbotProject() {
             </h1>
 
             <p className="mt-6 leading-7 text-muted">
-              A personal chatbot designed to answer questions about my background,
-              projects, research, and portfolio using retrieval-augmented generation.
+              The assistant behind the chat bubble on this site. It answers
+              questions about my background and my research by retrieving
+              passages from my CV, my thesis, and a set of written notes
+              before it replies.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-2">
@@ -57,6 +59,14 @@ export default function PersonalAiChatbotProject() {
             This chatbot acts as an interactive version of my portfolio. Instead
             of browsing static pages, visitors can ask questions about my work,
             technical skills, publications, and project details.
+          </p>
+
+          <p className="mt-5 leading-8 text-muted">
+            The corpus never changes, so the index is built once when the
+            container image is built and shipped inside it. That leaves no
+            vector database to run and no storage to pay for. Embeddings run on
+            CPU inside the AWS Lambda function, so retrieving passages calls no
+            API, and an open-weight model writes the answer from them.
           </p>
         </section>
       </section>
