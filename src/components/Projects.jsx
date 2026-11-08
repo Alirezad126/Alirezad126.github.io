@@ -12,7 +12,7 @@ export default function Projects({
   showFilters = true,
   showMore = false
 }) {
-  // The hero links here with #live so "Try live projects" lands on the two
+  // The hero links here with #live so "Try live projects" lands on the
   // demos rather than the full grid.
   const { hash } = useLocation()
   const [activeTag, setActiveTag] = useState(hash === '#live' ? LIVE_FILTER : 'All')

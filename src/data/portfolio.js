@@ -265,13 +265,14 @@ const portfolio = {
     {
       slug: 'rag-gpt-document-chatbot',
       detail: true,
+      // Upload a PDF and chat with it, running on AWS Lambda.
+      live: true,
       title: 'RAG-GPT: Personalized Document Query Chatbot',
       description:
         'A chatbot that answers questions about PDFs you upload, retrieving the relevant passages before it answers so the replies stay grounded in the document.',
       tags: ['Machine Learning', 'Python'],
       image:
         'https://miro.medium.com/v2/resize:fit:4800/format:webp/1*jtNZIbJ_MQc6u2TVt9QQAA.png',
-      status: 'Live',
       githubUrl: 'https://github.com/Alirezad126/RAG-GPT'
     },
     {
