@@ -10,12 +10,6 @@ const GREETED_KEY = 'askmebot-greeted'
 
 const OPENING = "Hi, I'm Alireza. Ask me anything about my research or my work."
 
-const SUGGESTIONS = [
-  'What are you working on now?',
-  'Tell me about your thesis',
-  'What did you do at IranBar?'
-]
-
 function Bubble({ turn }) {
   const mine = turn.type === 'user'
   return (
@@ -128,8 +122,6 @@ export default function AskMeBot() {
 
   if (!ENDPOINT) return null
 
-  const asked = turns.length > 1
-
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
       {greeting && !open && (
@@ -186,21 +178,6 @@ export default function AskMeBot() {
               <div className="flex items-center gap-2 text-[15px] text-muted">
                 <Loader2 size={14} className="animate-spin" />
                 Looking it up…
-              </div>
-            )}
-
-            {!asked && !thinking && (
-              <div className="mt-1 flex flex-wrap gap-2">
-                {SUGGESTIONS.map((suggestion) => (
-                  <button
-                    key={suggestion}
-                    type="button"
-                    onClick={() => send(suggestion)}
-                    className="focus-ring rounded-md border border-line px-2.5 py-1 text-[13px] font-medium text-muted transition-colors hover:border-accent hover:text-accent"
-                  >
-                    {suggestion}
-                  </button>
-                ))}
               </div>
             )}
 
