@@ -1,4 +1,4 @@
-import { ArrowRight, Github } from 'lucide-react'
+import { ArrowRight, Github, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function ProjectCard({ project, priority = false }) {
@@ -27,7 +27,14 @@ export default function ProjectCard({ project, priority = false }) {
   )
 
   return (
-    <article className="card group flex flex-col overflow-hidden hover:border-accent">
+    <article className="card group relative flex flex-col overflow-hidden hover:border-accent">
+      {project.live && (
+        <span className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-md bg-accent px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-wide text-ink shadow-lg">
+          <Zap size={13} />
+          Try live
+        </span>
+      )}
+
       {detailPath ? (
         <Link to={detailPath} tabIndex={-1} aria-hidden="true" className="block">
           {Thumb}
@@ -70,7 +77,7 @@ export default function ProjectCard({ project, priority = false }) {
                 to={detailPath}
                 className="focus-ring inline-flex items-center gap-1.5 rounded font-semibold text-accent hover:gap-2.5"
               >
-                Details
+                {project.live ? 'Try it live' : 'Details'}
                 <ArrowRight size={16} />
               </Link>
             )}

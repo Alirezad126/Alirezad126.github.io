@@ -5,7 +5,8 @@ import {
   Github,
   Linkedin,
   Mail,
-  MapPin
+  MapPin,
+  Zap
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import portfolio from '../data/portfolio'
@@ -58,7 +59,12 @@ export default function Hero() {
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link to="/projects" className="btn-primary focus-ring">
+            <Link to="/projects#live" className="btn-primary focus-ring">
+              <Zap size={18} />
+              Try live projects
+            </Link>
+
+            <Link to="/projects" className="btn-ghost focus-ring">
               View Projects
               <ArrowRight size={18} />
             </Link>

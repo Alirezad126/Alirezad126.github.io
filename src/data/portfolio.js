@@ -195,6 +195,8 @@ const portfolio = {
     {
       slug: 'sd-dpc-sparse-dictionary-control',
       detail: true,
+      // Runs in the browser from exported policies.
+      live: true,
       title: 'SD-DPC: Sparse Dictionary Differentiable Predictive Control',
       description:
         'Sparse, interpretable feedback policies learned by differentiating a constrained predictive-control objective through a SINDy model — constraints satisfied on every benchmark at 17 µs and under 0.1 kB per policy.',
@@ -286,12 +288,13 @@ const portfolio = {
     {
       slug: 'snake-dqn-agent',
       detail: true,
+      // Runs the trained agent on AWS Lambda.
+      live: true,
       title: 'Reinforcement Learning Agent Playing PySnake',
       description:
         'A DQN agent that learns to play a Snake environment autonomously.',
       tags: ['Reinforcement Learning', 'PyTorch'],
       image: 'https://www.coolmathgames.com/sites/default/files/Snake_OG-logo.jpg',
-      status: 'Live',
       githubUrl: '#'
     }
   ]

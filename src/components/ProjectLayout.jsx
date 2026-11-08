@@ -8,6 +8,7 @@ export default function ProjectLayout({
   summary,
   tags = [],
   links = [],
+  action,
   figure,
   children
 }) {
@@ -41,8 +42,9 @@ export default function ProjectLayout({
             </div>
           )}
 
-          {links.length > 0 && (
+          {(links.length > 0 || action) && (
             <div className="mt-8 flex flex-wrap gap-3">
+              {action}
               {links.map((link) => (
                 <a
                   key={link.href}

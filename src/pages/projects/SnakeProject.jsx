@@ -1,5 +1,6 @@
 import { ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import TryLiveSnake from '../../components/TryLiveSnake'
 
 const tags = ['DQN', 'Q-Learning', 'Experience Replay', 'Exploration', 'PyTorch']
 
@@ -30,6 +31,10 @@ export default function SnakeProject() {
               learn to play the Snake game by interacting with the environment and
               improving its behavior from reward feedback.
             </p>
+
+            <div className="mt-8">
+              <TryLiveSnake />
+            </div>
 
             <div className="mt-8 flex flex-wrap gap-2">
               {tags.map((tag) => (

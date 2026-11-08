@@ -1,8 +1,10 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Zap } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import portfolio from '../data/portfolio'
 import ProjectCard from './ProjectCard'
+
+const LIVE_FILTER = 'Live demos'
 
 export default function Projects({
   limit,
@@ -10,7 +12,10 @@ export default function Projects({
   showFilters = true,
   showMore = false
 }) {
-  const [activeTag, setActiveTag] = useState('All')
+  // The hero links here with #live so "Try live projects" lands on the two
+  // demos rather than the full grid.
+  const { hash } = useLocation()
+  const [activeTag, setActiveTag] = useState(hash === '#live' ? LIVE_FILTER : 'All')
 
   const tags = useMemo(() => {
     const counts = new Map()
@@ -26,14 +31,18 @@ export default function Projects({
       .filter(([, count]) => count > 1)
       .map(([tag]) => tag)
 
-    return ['All', ...useful]
+    const hasLive = portfolio.projects.some((project) => project.live)
+
+    return ['All', ...(hasLive ? [LIVE_FILTER] : []), ...useful]
   }, [])
 
   const filtered = useMemo(() => {
-    const all =
-      activeTag === 'All'
-        ? portfolio.projects
-        : portfolio.projects.filter((project) => project.tags?.includes(activeTag))
+    let all = portfolio.projects
+    if (activeTag === LIVE_FILTER) {
+      all = all.filter((project) => project.live)
+    } else if (activeTag !== 'All') {
+      all = all.filter((project) => project.tags?.includes(activeTag))
+    }
 
     return limit ? all.slice(0, limit) : all
   }, [activeTag, limit])
@@ -57,6 +66,7 @@ export default function Projects({
                     : 'border-line text-muted hover:border-accent hover:text-accent'
                 }`}
               >
+                {tag === LIVE_FILTER && <Zap size={13} className="mr-1.5 inline align-[-1px]" />}
                 {tag}
               </button>
             ))}

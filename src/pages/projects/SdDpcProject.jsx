@@ -1,5 +1,6 @@
 import DataTable from '../../components/DataTable'
 import { Equation, EquationGroup, InlineMath } from '../../components/Math'
+import TryLiveSdDpc from '../../components/TryLiveSdDpc'
 import ProjectLayout, {
   Figure,
   InfoGrid,
@@ -78,6 +79,7 @@ export default function SdDpcProject() {
           kind: 'github'
         }
       ]}
+      action={<TryLiveSdDpc />}
       figure={{
         src: '/projects/sddpc-method.png',
         alt: 'SD-DPC workflow: sparse identification feeding differentiable predictive control policy learning',
