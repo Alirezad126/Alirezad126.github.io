@@ -75,12 +75,11 @@ body {
   .shell {
     @apply mx-auto w-full px-5 sm:px-8;
     /*
-     * A fixed reading width rather than a percentage, so the column stays the
-     * same size and the share of the screen it takes shrinks as the monitor
-     * grows: roughly 72% on a laptop, under 60% on a large display. The vw
-     * term only matters on small windows, where it keeps a side margin.
+     * About 72% of the window through the laptop range, then held at
+     * max-w-content so the share keeps dropping on larger displays. The inner
+     * max is a floor that stops small windows from collapsing to a sliver.
      */
-    max-width: min(theme('maxWidth.content'), 92vw);
+    max-width: min(theme('maxWidth.content'), max(72vw, 46rem));
   }
 
   .section {
