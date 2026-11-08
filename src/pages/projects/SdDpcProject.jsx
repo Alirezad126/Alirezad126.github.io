@@ -93,7 +93,7 @@ export default function SdDpcProject() {
         items={[
           {
             title: 'Problem',
-            text: 'MPC solves an optimization at every step. Learned policies avoid that, but deep networks spread the control law across thousands of coupled weights that nobody can read or verify.'
+            text: 'MPC solves an optimization at every step. Learned policies avoid that, but deep networks distribute the control law across thousands of coupled weights that cannot readily be inspected or verified.'
           },
           {
             title: 'Method',
@@ -113,15 +113,15 @@ export default function SdDpcProject() {
           sampling instant, which is prohibitive on fast nonlinear systems or
           restricted hardware. Differentiable predictive control (DPC) moves
           that cost offline. It treats the optimal-control problem as an unsupervised
-          learning problem and returns an explicit policy that is cheap to
-          evaluate.
+          learning problem and returns an explicit policy that is inexpensive
+          to evaluate.
         </p>
 
         <p>
-          The catch is what that policy looks like. DPC policies are typically
-          deep networks, which distribute the control law across many coupled
-          parameters and are hard to interpret, verify, modify, or adapt once
-          deployed. SD-DPC keeps DPC&apos;s offline training but replaces the
+          The limitation lies in the form of that policy. DPC policies are
+          typically deep networks, which distribute the control law across many
+          coupled parameters and are difficult to interpret, verify, modify, or
+          adapt once deployed. SD-DPC keeps DPC&apos;s offline training but replaces the
           network with a <em>sparse dictionary expansion</em>, a short and
           explicit sum of known functions.
         </p>
@@ -223,11 +223,15 @@ export default function SdDpcProject() {
         </p>
       </Section>
 
-      <Section eyebrow="Guarantees" title="What the sparse structure buys">
+      <Section
+        eyebrow="Guarantees"
+        title="Properties conferred by the sparse structure"
+      >
         <p>
           Because the policy is a finite sum of known functions, properties that
-          need semidefinite relaxations or products of layer norms for a deep
-          network can be read straight off the retained coefficients.
+          would require semidefinite relaxations or products of layer norms for
+          a deep network can be obtained directly from the retained
+          coefficients.
         </p>
 
         <EquationGroup

@@ -39,7 +39,7 @@ const costRows = [
   {
     key: 'c1',
     index: 'C₁',
-    constraint: 'Storage stays inside its pressure band',
+    constraint: 'Storage remains within its pressure band',
     signal: 'Distance of the state of charge outside [0.2, 0.9]'
   },
   {
@@ -67,7 +67,7 @@ export default function EnergyHubProject() {
     <ProjectLayout
       eyebrow="M.A.Sc. Thesis"
       title="Optimal Dispatch of an Energy Hub with Compressed Air Energy Storage"
-      summary="A real-time dispatch controller for a trigenerative energy hub, trained as a constrained Markov decision process. Operational limits are priced by learned dual variables instead of hand-tuned reward penalties, and a MILP solved under perfect foresight supplies the expert demonstrations the policy starts from."
+      summary="A real-time dispatch controller for a trigenerative energy hub, formulated as a constrained Markov decision process. Operational limits are priced by learned dual variables rather than hand-tuned reward penalties, and a MILP solved under perfect foresight provides the expert demonstrations from which the policy is initialised."
       tags={tags}
       links={[
         {
@@ -87,7 +87,7 @@ export default function EnergyHubProject() {
       figure={{
         src: '/projects/energy-hub-schematic.svg',
         alt: 'Energy hub schematic showing the micro turbine, gas boiler, grid, renewables, AA-CAES, heat pump and absorption chiller feeding the electricity, heating and cooling networks',
-        caption: 'The hub: four supply networks, seven units, three demands to satisfy every hour.',
+        caption: 'Structure of the energy hub: four supply networks, seven conversion and storage units, and three demands to be met at every hour.',
         contain: true
       }}
     >
@@ -95,51 +95,59 @@ export default function EnergyHubProject() {
         items={[
           {
             title: 'Problem',
-            text: 'Day-ahead schedules go stale as soon as renewable output or demand deviates. Reinforcement learning adapts in real time, but a learned controller has no notion of a hard limit.'
+            text: 'Day-ahead schedules become suboptimal as soon as renewable generation or demand deviates from forecast. Reinforcement learning adapts in real time, but a learned policy has no explicit representation of operational limits.'
           },
           {
             title: 'Method',
-            text: 'Keep constraints out of the reward. Give each one its own cost critic and a dual variable that learns its price, and start from a policy cloned off a MILP solution.'
+            text: 'Constraints are excluded from the reward and assigned individual cost critics, each priced by a dual variable updated through projected gradient ascent. The policy is initialised by behavioural cloning of a MILP solution.'
           },
-            {
+          {
             title: 'Result',
-            text: 'Daily operational cost within 2.7% of the MILP optimum under perfect foresight, with violations driven to near zero and the storage still actively cycled.'
+            text: 'Daily operational cost within 2.7% of the MILP optimum obtained under perfect foresight, with constraint violations reduced to near zero and the storage unit still actively cycled.'
           }
         ]}
       />
 
-      <Section eyebrow="Motivation" title="Why penalty terms were not good enough">
+      <Section
+        eyebrow="Motivation"
+        title="Limitations of penalty-based constraint handling"
+      >
         <p>
-          The hub couples four networks. Natural gas feeds a micro turbine and a
-          gas boiler, the grid and the renewables feed the electrical bus, and
-          the heating and cooling demands are served by whatever combination of
-          recovered turbine heat, boiler output, heat pump, absorption chiller
-          and storage by-product the controller picks. Electricity, heat and
-          cold all have to balance at every hour, the storage has to stay inside
-          its pressure band and come back to its starting level by midnight, and
-          the grid connection has a rating.
+          The hub couples four energy networks. Natural gas supplies a micro
+          turbine and a gas boiler, the grid and the renewable units supply the
+          electrical bus, and the heating and cooling demands are met by a
+          combination of recovered turbine heat, boiler output, heat pump output,
+          absorption chiller output and storage by-product selected by the
+          controller. The three carriers must balance at every hour, the storage
+          unit must remain within its pressure band and return to its initial
+          level at the end of the horizon, and the grid connection is bounded by
+          its rating.
         </p>
 
         <p>
-          Solving this exactly needs perfect foresight of load and weather. A
-          mixed integer program gives the cost-optimal schedule for a day whose
-          data you already know, which is the right benchmark but not a
-          controller. Reinforcement learning gives a controller, but the usual
-          way to teach it about limits is to fold violations into the reward as
-          weighted penalties. That buries a cost-versus-safety trade-off inside
-          scalar weights you then have to tune by hand, and gives no guarantee
-          in either direction. Push the weights up and the agent hoards
-          feasibility by leaving the storage idle. Push them down and it saves
-          money by breaking the heat balance.
+          An exact solution requires perfect foresight of load and weather. A
+          mixed integer linear program yields the cost-optimal schedule for a day
+          whose realisations are known in advance, which provides an appropriate
+          benchmark but not a controller. Reinforcement learning yields a
+          controller, but operational limits are conventionally imposed by
+          folding violations into the reward as weighted penalty terms. This
+          embeds the cost-versus-safety trade-off in scalar weights that must be
+          tuned manually, and provides no guarantee in either direction.
+          Increasing the weights leads the agent to preserve feasibility by
+          leaving the storage idle, whereas decreasing them leads it to reduce
+          cost at the expense of the heating balance.
         </p>
       </Section>
 
-      <Section eyebrow="Formulation" title="Dispatch as a constrained MDP">
+      <Section
+        eyebrow="Formulation"
+        title="Dispatch as a constrained Markov decision process"
+      >
         <p>
-          Rather than one scalar reward, the problem keeps the objective and the
-          limits apart. The agent minimises the expected discounted operational
-          cost subject to four expected constraint costs staying under their
-          tolerances:
+          Instead of a single scalar reward, the formulation separates the
+          objective from the operational limits. The agent minimises the
+          expected discounted operational cost subject to four expected
+          constraint costs remaining below their respective tolerances:
         </p>
 
         <Equation
@@ -148,10 +156,11 @@ export default function EnergyHubProject() {
         />
 
         <p>
-          The stage cost <InlineMath math="c(s_t, a_t)" /> is the hourly bill:
-          imported electricity at the time-of-use tariff, exported electricity
-          credited at half that price, and gas for the turbine and the boiler at
-          their respective efficiencies.
+          The stage cost <InlineMath math="c(s_t, a_t)" /> is the hourly
+          operating expenditure: imported electricity at the time-of-use tariff,
+          exported electricity credited at half that tariff, and natural gas
+          consumed by the turbine and the boiler at their respective
+          efficiencies.
         </p>
 
         <Equation
@@ -160,11 +169,11 @@ export default function EnergyHubProject() {
         />
 
         <p>
-          The state carries nine normalised signals, and the action sets six
-          setpoints. Storage power and heat pump power are signed, since the
-          same unit either charges or discharges and either heats or cools, so
-          the actor uses a tanh head for those two and a sigmoid head for the
-          other four.
+          The state comprises nine normalised signals and the action specifies
+          six setpoints. Storage power and heat pump power are signed, since
+          each unit operates in one of two opposing modes, and the actor
+          therefore applies a tanh output head to those two components and a
+          sigmoid head to the remaining four.
         </p>
 
         <DataTable
@@ -180,12 +189,15 @@ export default function EnergyHubProject() {
         />
       </Section>
 
-      <Section eyebrow="Method" title="Learning the price of each constraint">
+      <Section
+        eyebrow="Method"
+        title="Primal-dual optimisation of the constraint prices"
+      >
         <p>
-          The Lagrangian of the constrained program adds every constraint cost
-          to the objective, weighted by its own dual variable. The actor
-          maximises that combination, and the duals are themselves learned
-          rather than set:
+          The Lagrangian of the constrained program augments the objective with
+          each constraint cost, weighted by an associated dual variable. The
+          actor maximises this combination, and the dual variables are learned
+          rather than prescribed:
         </p>
 
         <EquationGroup
@@ -202,13 +214,13 @@ export default function EnergyHubProject() {
         />
 
         <p>
-          The second line is where the safety behaviour comes from. A constraint
-          that the current policy satisfies has a negative gradient, so its
-          price decays towards zero and stops distorting the objective. A
-          constraint that is being violated has a positive gradient, so its
-          price climbs every update until respecting it is cheaper than paying
-          for it. Nothing is tuned by hand except the dual step size, and each
-          limit finds its own weight.
+          The second expression governs the safety behaviour. A constraint
+          satisfied by the current policy yields a negative gradient, so its
+          price decays towards zero and ceases to distort the objective. A
+          violated constraint yields a positive gradient, so its price increases
+          at every update until satisfying the constraint is less costly than
+          violating it. No quantity is tuned manually apart from the dual step
+          size, and each limit converges to its own weight.
         </p>
 
         <div className="grid gap-5 md:grid-cols-[0.9fr_1.1fr] md:items-center">
@@ -219,20 +231,21 @@ export default function EnergyHubProject() {
           />
 
           <p className="text-muted">
-            The duals in training. Heating and cooling grow expensive because
-            they bind at every hour, the storage price settles low once the
-            policy learns to respect the pressure band, and the grid price never
-            leaves zero because the connection rating is never approached. None
-            of that ordering was specified in advance. It is what the four
-            constraints turned out to be worth.
+            Evolution of the dual variables during training. The heating and
+            cooling prices increase because those constraints are active at
+            every hour, the storage price settles at a low value once the policy
+            learns to respect the pressure band, and the grid price remains at
+            zero because the connection rating is never approached. This
+            ordering was not specified in advance: it reflects the relative
+            difficulty of the four constraints as determined during training.
           </p>
         </div>
 
         <p>
-          The rest follows DDPG. Four cost critics are trained alongside the
-          reward critic on the same batches, each regressing its own one-step
-          target, and the actor and all five target networks are updated at a
-          slower cadence by Polyak averaging.
+          The remaining updates follow DDPG. Four cost critics are trained
+          alongside the reward critic on the same mini-batches, each regressing
+          its own one-step target, and the actor together with all five target
+          networks is updated at a lower frequency through Polyak averaging.
         </p>
 
         <EquationGroup
@@ -249,49 +262,56 @@ export default function EnergyHubProject() {
         />
       </Section>
 
-      <Section eyebrow="Demonstrations" title="Starting from a solver instead of from noise">
+      <Section
+        eyebrow="Demonstrations"
+        title="Expert demonstrations from a MILP benchmark"
+      >
         <p>
-          Exploring this action space from scratch is hopeless. Most random
-          dispatches break the heat balance, so the early reward signal is
-          dominated by violations and the agent settles into a local optimum
-          where it simply never uses the storage. The fix is to hand it a
-          baseline.
+          Unguided exploration of this action space is impractical. The majority
+          of randomly sampled dispatches violate the heating balance, so the
+          early reward signal is dominated by constraint violations and the
+          agent converges to a local optimum in which the storage unit is never
+          used. This is addressed by providing a baseline solution.
         </p>
 
         <p>
-          A MILP is solved in Pyomo for each of the 292 training days, with
-          binaries for the on and off states and the mutually exclusive modes,
-          giving the cost-optimal dispatch under perfect foresight. Those
-          trajectories are then used three times over. They pre-train the actor
-          by behavioural cloning, they are written into the first block of the
-          replay buffer where the write pointer can never overwrite them, and
-          they appear in every batch through the regression term in the actor
-          objective.
+          A mixed integer linear program is solved in Pyomo for each of the 292
+          training days, with binary variables for the on and off states and for
+          the mutually exclusive operating modes, yielding the cost-optimal
+          dispatch under perfect foresight. These trajectories are then used in
+          three ways: they pre-train the actor through behavioural cloning, they
+          occupy a protected block at the head of the replay buffer that the
+          write pointer cannot overwrite, and they enter every mini-batch
+          through the regression term in the actor objective.
         </p>
 
         <Figure
           src="/projects/energy-hub-agent.svg"
           alt="PD-DDPGfD architecture: four cost networks, an actor network and a critic network exchanging batches with a replay buffer seeded by a MILP solver"
-          caption="The full agent. The MILP feeds both the pre-training stage and the protected block of the replay memory."
+          caption="Architecture of the proposed agent. The MILP supplies both the pre-training stage and the protected block of the replay memory."
           contain
           zoomable
         />
       </Section>
 
-      <Section eyebrow="Storage model" title="Part load matters more than it looks">
+      <Section
+        eyebrow="Storage model"
+        title="Off-design modelling of the storage unit"
+      >
         <p>
-          Treating the storage as a fixed round-trip efficiency over-states what
-          it can contribute, because compressor and expander efficiency fall off
-          sharply away from the design point. The unit here is modelled through
-          its part-load curves instead. Isentropic efficiencies and expander
-          pressure ratios are polynomial fits in load percentage, and the full
-          thermodynamic chain of two compression stages with intercooling and
-          two reheated expansion stages is built on top of them.
+          Representing the storage unit by a fixed round-trip efficiency
+          overstates its contribution, since compressor and expander
+          efficiencies degrade considerably away from the design point. The unit
+          is therefore modelled through its part-load characteristics.
+          Isentropic efficiencies and expander pressure ratios are expressed as
+          polynomial fits in load percentage, and the complete thermodynamic
+          chain of two compression stages with intercooling and two reheated
+          expansion stages is derived from them.
         </p>
 
         <p>
-          The tank is a constant-temperature volume, so pressure follows from
-          the air mass balance alone:
+          The air tank is treated as a constant-temperature volume, so the
+          pressure follows directly from the mass balance:
         </p>
 
         <Equation
@@ -300,24 +320,27 @@ export default function EnergyHubProject() {
         />
 
         <p>
-          Those mass flow rates come out of the off-design model as nonlinear
-          functions of power, which the MILP cannot take. They are linearised
-          over the whole operating range before the solver sees them, which
-          keeps the benchmark inside the mixed integer linear class while
-          preserving the part-load behaviour that matters. The environment the
-          agent trains against uses the same linear fits, so the controller and
-          the benchmark are judged on the same physics.
+          The off-design model returns these mass flow rates as nonlinear
+          functions of power, which the MILP formulation cannot accommodate.
+          They are linearised over the full operating range before entering the
+          solver, which retains the benchmark within the mixed integer linear
+          class while preserving the relevant part-load behaviour. The training
+          environment employs the same linear fits, so the controller and the
+          benchmark are evaluated under identical physical assumptions.
         </p>
       </Section>
 
-      <Section eyebrow="Results" title="Near the benchmark, without trading away safety">
+      <Section
+        eyebrow="Results"
+        title="Comparison against the benchmark and baselines"
+      >
         <p>
-          The comparison runs against plain DDPG, against DDPG from
-          demonstrations, against the primal-dual agent without demonstrations,
-          and against the MILP under perfect foresight. The interesting question
-          is not which one gets the lowest cost, since the MILP wins that by
-          construction. It is which one gets close to the MILP while keeping its
-          violations down.
+          The proposed method is compared against standard DDPG, DDPG from
+          demonstrations, the primal-dual agent without demonstrations, and the
+          MILP solution under perfect foresight. The relevant criterion is not
+          which method attains the lowest cost, since the MILP does so by
+          construction, but which method approaches the MILP while maintaining
+          low constraint violation.
         </p>
 
         <div className="grid gap-5 md:grid-cols-2">
@@ -339,35 +362,38 @@ export default function EnergyHubProject() {
         </div>
 
         <p>
-          The agents that start cold spike early and then plateau well above the
-          benchmark. The two that use demonstrations start close to it and stay
-          there, landing within 2.7% of the MILP optimum, and they beat both the
-          behavioural cloning policy they were initialised from and the
-          regression baseline.
+          The agents initialised without demonstrations exhibit a pronounced
+          early transient and subsequently plateau well above the benchmark. The
+          two agents that use demonstrations begin close to the benchmark and
+          remain there, converging to within 2.7% of the MILP optimum, and they
+          outperform both the behavioural cloning policy from which they were
+          initialised and the regression baseline.
         </p>
 
         <p>
-          Reporting violations per constraint is a direct consequence of the
-          formulation. A single penalty term would have collapsed these four
-          curves into one number, hiding the fact that the heating balance is
-          the one doing the work and the grid rating is never close to binding.
+          The ability to report violations per constraint follows directly from
+          the formulation. A single aggregate penalty term would have reduced
+          these four curves to one quantity, obscuring the observation that the
+          heating balance is the binding constraint while the grid rating is
+          never approached.
         </p>
       </Section>
 
-      <Section eyebrow="Takeaway" title="What transferred">
+      <Section eyebrow="Conclusions" title="Conclusions and subsequent work">
         <p>
-          The useful part of this work was not the specific hub. It was that
-          separating constraints from the objective, and letting a dual variable
-          discover what each one is worth, removes an entire layer of
-          hand-tuning and makes the resulting behaviour inspectable. You can
-          read off which limits the policy is actually fighting against. That
-          idea carried directly into my later work on building control and on
-          sparse predictive control policies.
+          The principal contribution of this work is not specific to the energy
+          hub considered. Separating the constraints from the objective, and
+          allowing a dual variable to determine the price of each, removes an
+          entire layer of manual tuning and renders the resulting behaviour
+          interpretable, since the constraints that actively restrict the policy
+          can be identified directly from the learned prices. This formulation
+          informed subsequent work on building control and on sparse predictive
+          control policies.
         </p>
 
         <p>
-          The code, including the MILP, the off-design storage model, the
-          environment and the agent, is on{' '}
+          The implementation, comprising the MILP, the off-design storage model,
+          the training environment and the agent, is available on{' '}
           <a
             href="https://github.com/Alirezad126/PD-DDPGfD"
             target="_blank"

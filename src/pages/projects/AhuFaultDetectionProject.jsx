@@ -178,12 +178,12 @@ export default function AhuFaultDetectionProject() {
         </p>
 
         <p>
-          The shipped ground-truth column is binary: faulted or not. Since each
-          fault was injected on a known date, I added a{' '}
-          <em>type of fault</em> column with fifteen categories, fourteen fault
-          classes plus the unfaulted class. That turns detection into diagnosis
-          and, as a side effect, balances a dataset that was heavily skewed
-          toward faulty samples.
+          The ground-truth column supplied with the dataset is binary: faulted
+          or not. Since each fault was injected on a known date, a{' '}
+          <em>type of fault</em> column was derived with fifteen categories,
+          comprising the fourteen fault classes and the unfaulted class. This
+          reformulates detection as diagnosis and, as a secondary effect,
+          balances a dataset that was heavily skewed toward faulty samples.
         </p>
 
         <DataTable
@@ -234,7 +234,8 @@ export default function AhuFaultDetectionProject() {
 
       <Section eyebrow="Evaluation" title="How the models were scored">
         <p>
-          With fifteen classes, a single accuracy number hides a lot. Each model
+          With fifteen classes, a single accuracy figure is insufficiently
+          informative. Each model
           was scored on accuracy, precision, recall, and F1, with all four
           averaged across the fifteen classes, plus a confusion matrix and
           per-class ROC curves. Writing{' '}
@@ -329,7 +330,7 @@ export default function AhuFaultDetectionProject() {
         </p>
       </Section>
 
-      <Section eyebrow="Feature importance" title="Which sensors actually matter">
+      <Section eyebrow="Feature importance" title="Which sensors carry the diagnostic signal">
         <p>
           Two ranking strategies were compared: linear correlation between
           features, dropping one of any pair outside{' '}
