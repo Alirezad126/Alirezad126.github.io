@@ -50,7 +50,7 @@ export default function ProjectCard({ project, priority = false }) {
           </span>
         )}
 
-        <h3 className="mt-3 text-lg font-semibold leading-snug text-heading group-hover:text-accent">
+        <h3 className="mt-3 mb-5 text-lg font-semibold leading-snug text-heading group-hover:text-accent">
           {detailPath ? (
             <Link to={detailPath} className="focus-ring rounded">
               {project.title}
@@ -59,16 +59,6 @@ export default function ProjectCard({ project, priority = false }) {
             project.title
           )}
         </h3>
-
-        <p className="mt-2.5 leading-7">{project.description}</p>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.tags?.slice(0, 4).map((tag) => (
-            <span key={tag} className="chip">
-              {tag}
-            </span>
-          ))}
-        </div>
 
         {(detailPath || hasCode) && (
           <div className="mt-auto flex items-center gap-5 border-t border-line pt-5">
